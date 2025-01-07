@@ -21,6 +21,16 @@ https://docs.expo.dev/develop/user-interface/safe-areas/
   information. This allows you to position your content appropriately around notches, status bars,
   home indicators, and other such device and operating system interface elements.
 - It also provides a `SafeAreaView` to render content within the safe area boundaries of a device.
+- It's generally recommended to include `StatusBar` within `SafeAreaView` that is nested within a
+  `SafeAreaProvider`.
+
+## React Native StatusBar
+
+https://reactnative.dev/docs/statusbar
+
+- Component to control the app's status bar.
+- E.g. `currentHeight` returns the height of the status bar (only in Android; returns `null` in
+  iOS).
 
 ## Layout with Flexbox
 
