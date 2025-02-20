@@ -9,6 +9,13 @@
 
 https://zerotomastery.io/cheatsheets/react-native-cheat-sheet/
 
+## Set up ESLint in VS Code for React Native applications that use TypeScript
+
+- https://typescript-eslint.io/
+- https://docs.expo.dev/guides/using-eslint/
+
+- ESLint statically analyzes your code to quickly find problems.
+
 ## Safe Area Context
 
 https://docs.expo.dev/versions/latest/sdk/safe-area-context/
