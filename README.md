@@ -16,6 +16,13 @@ https://zerotomastery.io/cheatsheets/react-native-cheat-sheet/
 
 - ESLint statically analyzes your code to quickly find problems.
 
+## React Native Paper
+
+https://callstack.github.io/react-native-paper/
+
+- A collection of customizable and production-ready components for React Native, following Google’s
+  Material Design guidelines.
+
 ## Safe Area Context
 
 https://docs.expo.dev/versions/latest/sdk/safe-area-context/
