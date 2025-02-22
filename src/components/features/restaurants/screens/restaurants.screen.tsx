@@ -1,35 +1,34 @@
 import { useState } from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import styled from 'styled-components/native';
 
 import {
   Searchbar, // input box where users can type search queries.
 } from 'react-native-paper';
 
-import { RestaurantInfo } from '../components/restaurant-info.component';
+import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
+
+const SearchContainer = styled.View`
+  padding: 16px;
+`;
+
+const RestaurantsListContainer = styled.View`
+  flex: 1;
+  padding: 16px;
+  background-color: blue;
+`;
 
 export const RestaurantsScreen = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   return (
     <>
-      <View style={styles.search}>
+      <SearchContainer>
         <Searchbar placeholder='Search' onChangeText={setSearchQuery} value={searchQuery} />
-      </View>
-      <View style={styles.list}>
-        <RestaurantInfo />
-      </View>
+      </SearchContainer>
+      <RestaurantsListContainer>
+        <RestaurantInfoCard restaurant={{}} />
+      </RestaurantsListContainer>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  search: {
-    padding: 16,
-  },
-  list: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: 'blue',
-  },
-});
