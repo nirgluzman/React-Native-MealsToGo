@@ -22,6 +22,20 @@ https://callstack.github.io/react-native-paper/
 
 - A collection of customizable and production-ready components for React Native, following Google’s
   Material Design guidelines.
+- Convert CSS to React Native stylesheet object,
+  https://github.com/styled-components/css-to-react-native
+
+## Styled Components (React and React Native)
+
+https://styled-components.com/
+
+- Styled-Components is a library for React that allows you to write your CSS directly in your
+  javascript.
+
+```bash
+yarn add styled-components
+yarn add -D @types/styled-components-react-native
+```
 
 ## Safe Area Context
 
