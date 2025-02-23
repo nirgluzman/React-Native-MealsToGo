@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
 
-import {
-  Card, // sheet of material that serves as an entry point to more detailed information.
-} from 'react-native-paper';
+import { Card } from 'react-native-paper';
+
+// render SVG content directly from an XML string or file.
+import { SvgXml } from 'react-native-svg';
+
+import star from '../../../../../assets/star';
 
 const RestaurantCard = styled(Card)`
   background-color: ${(props: any) => props.theme.colors.bg.primary};
@@ -27,6 +30,12 @@ const Address = styled.Text`
   font-family: ${(props: any) => props.theme.fonts.body};
   font-size: ${(props: any) => props.theme.fontSizes.caption};
   color: ${(props: any) => props.theme.colors.text.primary};
+`;
+
+const Rating = styled.View`
+  flex-direction: row;
+  padding-top: ${(props: any) => props.theme.space[2]};
+  padding-bottom: ${(props: any) => props.theme.space[2]};
 `;
 
 interface Restaurant {
@@ -56,11 +65,18 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
     isClosedTemporarily = false,
   } = restaurant;
 
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
+
   return (
     <RestaurantCard mode='elevated' elevation={5}>
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Title>{name}</Title>
+        <Rating>
+          {ratingArray.map(() => {
+            return <SvgXml width='20' height='20' xml={star} />;
+          })}
+        </Rating>
         <Address>{address}</Address>
       </Info>
     </RestaurantCard>
