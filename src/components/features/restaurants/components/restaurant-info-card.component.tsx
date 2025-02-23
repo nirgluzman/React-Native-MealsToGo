@@ -5,18 +5,19 @@ import {
 } from 'react-native-paper';
 
 const RestaurantCard = styled(Card)`
-  background-color: white;
+  background-color: ${(props: any) => props.theme.colors.bg.primary};
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
-  background-color: white;
-  padding: 20px;
+  background-color: ${(props: any) => props.theme.colors.bg.primary};
+  padding: ${(props: any) => props.theme.space[3]};
 `;
 
 const Title = styled.Text`
-  padding: 16px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: ${(props: any) => props.theme.space[3]};
+  font-size: ${(props: any) => props.theme.sizes[1]};
+  font-weight: ${(props: any) => props.theme.fontWeights.bold};
+  color: ${(props: any) => props.theme.colors.text.primary};
 `;
 
 interface Restaurant {
