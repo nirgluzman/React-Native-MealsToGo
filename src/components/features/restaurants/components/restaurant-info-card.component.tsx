@@ -1,11 +1,13 @@
-import styled from 'styled-components/native';
+import { Text } from 'react-native';
 
+import styled from 'styled-components/native';
 import { Card } from 'react-native-paper';
 
 // render SVG content directly from an XML string or file.
 import { SvgXml } from 'react-native-svg';
 
 import star from '../../../../../assets/star';
+import open from '../../../../../assets/open';
 
 const RestaurantCard = styled(Card)`
   background-color: ${(props: any) => props.theme.colors.bg.primary};
@@ -32,10 +34,21 @@ const Address = styled.Text`
   color: ${(props: any) => props.theme.colors.text.primary};
 `;
 
+const Section = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Rating = styled.View`
   flex-direction: row;
   padding-top: ${(props: any) => props.theme.space[2]};
   padding-bottom: ${(props: any) => props.theme.space[2]};
+`;
+
+const SectionEnd = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 interface Restaurant {
@@ -62,7 +75,7 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
     address = 'Rosenheimer Str. 12, 81669 München',
     isOpenNow = true,
     rating = 4,
-    isClosedTemporarily = false,
+    isClosedTemporarily = true,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -72,11 +85,17 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Title>{name}</Title>
-        <Rating>
-          {ratingArray.map(() => {
-            return <SvgXml width='20' height='20' xml={star} />;
-          })}
-        </Rating>
+        <Section>
+          <Rating>
+            {ratingArray.map(() => {
+              return <SvgXml width='20' height='20' xml={star} />;
+            })}
+          </Rating>
+          <SectionEnd>
+            {isClosedTemporarily && <Text style={{ color: 'red' }}>CLOSED TEMPORARILY</Text>}
+            {isOpenNow && <SvgXml width='20' height='20' xml={open} />}
+          </SectionEnd>
+        </Section>
         <Address>{address}</Address>
       </Info>
     </RestaurantCard>
