@@ -1,39 +1,56 @@
-// component to provide a flexible and reusable way to add consistent spacing within the app's UI,
-// ensuring a visually harmonious layout.
+// component to provide a flexible and reusable way to add consistent spacing within the app's UI.
 
-import styled from 'styled-components/native';
+import { ReactNode } from 'react';
 
-const TopSmall = styled.View`
-  margin-top: ${(props: any) => props.theme.space[1]};
-`;
-const TopMedium = styled.View`
-  margin-top: ${(props: any) => props.theme.space[2]};
-`;
-const TopLarge = styled.View`
-  margin-top: ${(props: any) => props.theme.space[3]};
-`;
+import styled, { useTheme } from 'styled-components/native';
 
-const LeftSmall = styled.View`
-  margin-left: ${(props: any) => props.theme.space[1]};
-`;
-const LeftMedium = styled.View`
-  margin-left: ${(props: any) => props.theme.space[2]};
-`;
-const LeftLarge = styled.View`
-  margin-left: ${(props: any) => props.theme.space[3]};
+import { Theme } from '../../infrastructure/theme';
+
+export const positionVariant = {
+  top: 'margin-top',
+  right: 'margin-right',
+  bottom: 'margin-bottom',
+  left: 'margin-left',
+} as const;
+
+// type that is a union of the keys of the positionVariant object.
+type PositionType = keyof typeof positionVariant;
+
+export const sizeVariant = {
+  small: 1,
+  medium: 2,
+  large: 3,
+} as const;
+
+// type that is a union of the keys of the sizeVariant object.
+type SizeType = keyof typeof sizeVariant;
+
+const getVariant = (position: PositionType, size: SizeType, theme: Theme) => {
+  const property = positionVariant[position];
+  const sizeIndex = sizeVariant[size];
+  const value = theme.space[sizeIndex];
+
+  return `${property}:${value}`;
+};
+
+// styled View component.
+const SpacerView = styled.View`
+  ${({ variant }: { variant: string }) => variant};
 `;
 
 interface SpacerProps {
-  variant?: 'top.small' | 'top.medium' | 'top.large' | 'left.small' | 'left.medium' | 'left.large';
+  position?: PositionType;
+  size?: SizeType;
+  children?: ReactNode; // children property (optional)
 }
 
-export const Spacer = ({ variant }: SpacerProps) => {
-  if (variant === 'top.large') return <TopLarge />;
-  if (variant === 'top.medium') return <TopMedium />;
+export const Spacer = ({
+  position = 'top', // use 'top' as the default position if none is provided.
+  size = 'medium', // use 'medium' as the default size if none is provided.
+  children,
+}: SpacerProps) => {
+  const theme = useTheme() as Theme; // custom hook to get the current theme from a ThemeProvider.
+  const variant = getVariant(position, size, theme);
 
-  if (variant === 'left.large') return <LeftLarge />;
-  if (variant === 'left.medium') return <LeftMedium />;
-  if (variant === 'left.small') return <LeftSmall />;
-
-  return <TopSmall />;
+  return <SpacerView variant={variant}>{children}</SpacerView>;
 };
