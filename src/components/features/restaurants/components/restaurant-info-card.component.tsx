@@ -1,10 +1,12 @@
-import { Image, Text, View } from 'react-native';
+import { Image, Text } from 'react-native';
 
 import styled from 'styled-components/native';
 import { Card } from 'react-native-paper';
 
 // render SVG content directly from an XML string or file.
 import { SvgXml } from 'react-native-svg';
+
+import { Spacer } from '../../../spacer/spacer.component';
 
 import star from '../../../../../assets/star';
 import open from '../../../../../assets/open';
@@ -93,9 +95,9 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
           </Rating>
           <SectionEnd>
             {isClosedTemporarily && <Text style={{ color: 'red' }}>CLOSED TEMPORARILY</Text>}
-            <View style={{ paddingLeft: 16 }} />
+            <Spacer variant='left.large' />
             {isOpenNow && <SvgXml width='20' height='20' xml={open} />}
-            <View style={{ paddingLeft: 16 }} />
+            <Spacer variant='left.large' />
             <Image style={{ width: 16, height: 16 }} source={{ uri: icon }} />
           </SectionEnd>
         </Section>
