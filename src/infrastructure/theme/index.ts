@@ -11,4 +11,6 @@ export const theme = {
   fonts,
   fontSizes,
   fontWeights,
-};
+} as const;
+
+export type Theme = typeof theme;

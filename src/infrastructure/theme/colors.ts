@@ -12,10 +12,14 @@ export const colors = {
     disabled: '#DEDEDE',
     error: '#D0421B',
     success: '#138000',
+    active: 'tomato',
+    inactive: 'gray',
   },
   bg: {
     primary: '#FFFFFF',
     secondary: '#F1F1F1',
+    tertiary: 'lavender',
+    quaternary: 'lightblue',
   },
   text: {
     primary: '#262626',
@@ -25,4 +29,6 @@ export const colors = {
     error: '#D0421B',
     success: '#138000',
   },
-};
+} as const;
+
+export type Colors = typeof colors;
