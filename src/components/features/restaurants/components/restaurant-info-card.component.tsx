@@ -1,57 +1,23 @@
-import styled from 'styled-components/native';
-import { Theme } from '../../../../infrastructure/theme';
-
-import { Card } from 'react-native-paper';
-
-// render SVG content directly from an XML string or file.
-import { SvgXml } from 'react-native-svg';
+import {
+  SvgXml, // render SVG content directly from an XML string or file.
+} from 'react-native-svg';
 
 import { Spacer } from '../../../spacer/spacer.component';
 import { Text } from '../../../typography/text.component';
 
+import {
+  RestaurantCard,
+  RestaurantCardCover,
+  Info,
+  Address,
+  Section,
+  Rating,
+  Icon,
+  SectionEnd,
+} from './restaurant-info-card.styles';
+
 import star from '../../../../../assets/star';
 import open from '../../../../../assets/open';
-
-const RestaurantCard = styled(Card)`
-  background-color: ${({ theme }: { theme: Theme }) => theme.colors.bg.primary};
-`;
-
-const RestaurantCardCover = styled(Card.Cover)`
-  background-color: ${({ theme }: { theme: Theme }) => theme.colors.bg.primary};
-  padding: ${(props: any) => props.theme.space[3]};
-`;
-
-const Info = styled.View`
-  padding: ${({ theme }: { theme: Theme }) => theme.space[3]};
-`;
-
-const Address = styled.Text`
-  font-family: ${({ theme }: { theme: Theme }) => theme.fonts.body};
-  font-size: ${({ theme }: { theme: Theme }) => theme.fontSizes.caption};
-  color: ${({ theme }: { theme: Theme }) => theme.colors.text.primary};
-`;
-
-const Section = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Rating = styled.View`
-  flex-direction: row;
-  padding-top: ${({ theme }: { theme: Theme }) => theme.space[2]};
-  padding-bottom: ${({ theme }: { theme: Theme }) => theme.space[2]};
-`;
-
-const Icon = styled.Image`
-  width: 16px;
-  height: 16px;
-`;
-
-const SectionEnd = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
 
 interface Restaurant {
   name: string;
