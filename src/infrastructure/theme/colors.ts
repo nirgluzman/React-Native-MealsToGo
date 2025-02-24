@@ -25,4 +25,7 @@ export const colors = {
     error: '#D0421B',
     success: '#138000',
   },
-};
+} as const;
+
+type Colors = typeof colors;
+export type { Colors };
