@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 import styled from 'styled-components/native';
 import { Card } from 'react-native-paper';
@@ -68,7 +68,7 @@ interface RestaurantProps {
 export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
   const {
     name = 'Pizzesco',
-    icon = '',
+    icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
     photos = [
       'https://lh3.googleusercontent.com/p/AF1QipNOm7YNlbBBuLr1TzTci8uys8nvIQfGxo8QkW41=w408-h240-k-no-pi-0-ya181.05489-ro-0-fo100',
     ],
@@ -87,13 +87,16 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
         <Title>{name}</Title>
         <Section>
           <Rating>
-            {ratingArray.map(() => {
-              return <SvgXml width='20' height='20' xml={star} />;
+            {ratingArray.map((_, i) => {
+              return <SvgXml key={i} width='20' height='20' xml={star} />;
             })}
           </Rating>
           <SectionEnd>
             {isClosedTemporarily && <Text style={{ color: 'red' }}>CLOSED TEMPORARILY</Text>}
+            <View style={{ paddingLeft: 16 }} />
             {isOpenNow && <SvgXml width='20' height='20' xml={open} />}
+            <View style={{ paddingLeft: 16 }} />
+            <Image style={{ width: 16, height: 16 }} source={{ uri: icon }} />
           </SectionEnd>
         </Section>
         <Address>{address}</Address>
