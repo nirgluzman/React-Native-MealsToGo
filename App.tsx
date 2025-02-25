@@ -4,6 +4,10 @@ import {
   SafeAreaView, // render content within the safe area boundaries of a device.
 } from 'react-native-safe-area-context';
 
+// Bottom Tabs Navigator
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 // Google Fonts
 // https://docs.expo.dev/develop/user-interface/fonts/#with-usefonts-hook-1
 // https://github.com/expo/google-fonts
@@ -18,6 +22,10 @@ import {
 import { theme } from './src/infrastructure/theme';
 
 import { RestaurantsScreen } from './src/components/features/restaurants/screens/restaurants.screen';
+import { MapScreen } from './src/components/features/map/screens/map.screen';
+import { SettingsScreen } from './src/components/features/settings/screens/settings.screen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   // load custom fonts.
@@ -36,7 +44,13 @@ export default function App() {
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
           <StatusBar style='auto' />
-          <RestaurantsScreen />
+          <NavigationContainer>
+            <Tab.Navigator>
+              <Tab.Screen name='Restaurants' component={RestaurantsScreen} />
+              <Tab.Screen name='Map' component={MapScreen} />
+              <Tab.Screen name='Settings' component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
         </SafeAreaView>
       </SafeAreaProvider>
     </ThemeProvider>
