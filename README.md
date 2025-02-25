@@ -29,8 +29,10 @@ https://callstack.github.io/react-native-paper/
 
 https://styled-components.com/
 
-- Styled-Components is a library for React that allows you to write your CSS directly in your
+- `Styled-Components` is a library for React that allows you to write your CSS directly in your
   javascript.
+- `yarn` is required for installation, as it seems that `npm` does not work correctly for this
+  package.
 
 ```bash
 yarn add styled-components
@@ -63,3 +65,15 @@ https://reactnative.dev/docs/statusbar
 ## Layout with Flexbox
 
 https://reactnative.dev/docs/flexbox#flex
+
+## Rendering lists - FlatList & ScrollView
+
+https://reactnative.dev/docs/flatlist <br /> https://reactnative.dev/docs/scrollview
+
+- `FlatList` is a component optimized for handling large lists of data; it efficiently renders only
+  the visible items on the screen, conserving memory and improving performance.
+- The `FlatList` component also provides scrolling, pull-to-refresh, and item selection features.
+- A `ScrollView` is a scrolling container, but it's not ideal as a container for mapping over a
+  large collection of list items. This is because it will render the entire list of elements whether
+  they're on-screen or not. A `FlatList` component only renders items on screen, which helps improve
+  app performance for long lists.
