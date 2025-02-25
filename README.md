@@ -9,6 +9,20 @@
 
 https://zerotomastery.io/cheatsheets/react-native-cheat-sheet/
 
+## Expo
+
+https://docs.expo.dev/
+
+- Expo is a framework that makes developing Android and iOS apps easier.
+
+- Create a new project using the blank template with TypeScript enabled,
+  https://docs.expo.dev/more/create-expo/#--template
+
+```bash
+yarn create expo-app --template blank-typescript
+
+```
+
 ## Set up ESLint in VS Code for React Native applications that use TypeScript
 
 - https://typescript-eslint.io/
@@ -77,3 +91,19 @@ https://reactnative.dev/docs/flatlist <br /> https://reactnative.dev/docs/scroll
   large collection of list items. This is because it will render the entire list of elements whether
   they're on-screen or not. A `FlatList` component only renders items on screen, which helps improve
   app performance for long lists.
+
+## React Navigation
+
+https://reactnavigation.org/
+
+- Library to implement navigation functionality in a React application.
+
+- A `Navigator` is a React component that decides how to render the screens we have defined. It
+  contains `Screen` elements as its children to define the configuration for screens.
+
+## Typechecking the Navigator
+
+https://reactnavigation.org/docs/typescript/
+
+- React Navigation can be configured to type-check screens and their params, as well as various
+  other APIs using TypeScript.
