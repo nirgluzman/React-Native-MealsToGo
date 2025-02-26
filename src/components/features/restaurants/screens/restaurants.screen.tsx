@@ -1,16 +1,16 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 import styled from 'styled-components/native';
-import { theme, Theme } from '../../../../infrastructure/theme';
+import { theme } from '../../../../infrastructure/theme';
 
 import {
-  Searchbar, // input box where users can type search queries.
   ActivityIndicator, // present progress of some activity in the app.
 } from 'react-native-paper';
 
 import { RestaurantsContext } from '../../../../services/restaurants/restaurants.context';
 
 import { Spacer } from '../../../spacer/spacer.component';
+import { Search } from '../components/search.component';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 
 // styled component based on the ActivityIndicator.
@@ -25,10 +25,6 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-const SearchContainer = styled.View`
-  padding: ${({ theme }: { theme: Theme }) => theme.space[3]};
-`;
-
 const RestaurantList = styled.FlatList.attrs({
   // we're using styled-components to create a styled component from FlatList.
   // attrs() is a helper function provided by styled-components that allow us to configure props of the underlying component (not CSS styles).
@@ -38,8 +34,6 @@ const RestaurantList = styled.FlatList.attrs({
 })``;
 
 export const RestaurantsScreen = () => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
   const { restaurants, isLoading } = useContext(RestaurantsContext);
 
   return (
@@ -49,9 +43,7 @@ export const RestaurantsScreen = () => {
           <Loading animating={true} color={theme.colors.ui.success} size={50} />
         </LoadingContainer>
       )}
-      <SearchContainer>
-        <Searchbar placeholder='Search' onChangeText={setSearchQuery} value={searchQuery} />
-      </SearchContainer>
+      <Search />
       <RestaurantList
         data={restaurants}
         keyExtractor={(item: any) => item.name}
