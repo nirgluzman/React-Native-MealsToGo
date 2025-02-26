@@ -26,7 +26,8 @@ interface RestaurantProps {
 }
 
 export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
-  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily } = restaurant;
+  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily, placeId } =
+    restaurant;
 
   const ratingArray = Array.from(new Array(Math.round(rating)));
 
@@ -38,7 +39,8 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
         <Section>
           <Rating>
             {ratingArray.map((_, i) => {
-              return <SvgXml key={i} width='20' height='20' xml={star} />;
+              // resolve React key warning by adding placeId to rating star map keys.
+              return <SvgXml key={`star-${placeId}-${i}`} width='20' height='20' xml={star} />;
             })}
           </Rating>
           <SectionEnd>
