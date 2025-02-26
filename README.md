@@ -5,6 +5,10 @@
 - https://github.com/nirgluzman/React-Native-MealsToGo.git
 - https://github.com/mobinni/MealsToGo.git
 
+## Architecture
+
+![](./docs/images/architecture.png)
+
 ## React Native Cheat Sheet
 
 https://zerotomastery.io/cheatsheets/react-native-cheat-sheet/
