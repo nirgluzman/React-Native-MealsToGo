@@ -9,4 +9,5 @@ export type Restaurant = {
   isOpenNow: boolean;
   rating: number;
   isClosedTemporarily: boolean;
+  placeId: string;
 };
