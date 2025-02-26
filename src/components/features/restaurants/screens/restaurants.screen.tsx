@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import styled from 'styled-components/native';
 import { Theme } from '../../../../infrastructure/theme';
@@ -6,6 +6,8 @@ import { Theme } from '../../../../infrastructure/theme';
 import {
   Searchbar, // input box where users can type search queries.
 } from 'react-native-paper';
+
+import { RestaurantsContext } from '../../../../services/restaurants/restaurants.context';
 
 import { Spacer } from '../../../spacer/spacer.component';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
@@ -25,19 +27,22 @@ const RestaurantList = styled.FlatList.attrs({
 export const RestaurantsScreen = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  const { restaurants } = useContext(RestaurantsContext);
+
   return (
     <>
       <SearchContainer>
         <Searchbar placeholder='Search' onChangeText={setSearchQuery} value={searchQuery} />
       </SearchContainer>
       <RestaurantList
-        data={[{ name: '1' }, { name: '2' }, { name: '3' }]}
-        keyExtractor={(item) => item.name}
-        renderItem={() => (
+        data={restaurants}
+        keyExtractor={(item: any) => item.name}
+        renderItem={({ item }: { item: any }) => (
           <Spacer position='bottom' size='medium'>
-            <RestaurantInfoCard restaurant={{}} />
+            <RestaurantInfoCard restaurant={item} />
           </Spacer>
         )}
+        showsVerticalScrollIndicator={false}
       />
     </>
   );

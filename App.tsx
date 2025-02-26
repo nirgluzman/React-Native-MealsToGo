@@ -25,6 +25,8 @@ import {
 
 import { theme } from './src/infrastructure/theme';
 
+import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
+
 import { RestaurantsScreen } from './src/components/features/restaurants/screens/restaurants.screen';
 import { MapScreen } from './src/components/features/map/screens/map.screen';
 import { SettingsScreen } from './src/components/features/settings/screens/settings.screen';
@@ -75,19 +77,21 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar style='auto' />
-          <NavigationContainer>
-            <Tab.Navigator screenOptions={screenOptions}>
-              <Tab.Screen name='Restaurants' component={RestaurantsScreen} />
-              <Tab.Screen name='Map' component={MapScreen} />
-              <Tab.Screen name='Settings' component={SettingsScreen} />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </SafeAreaView>
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar style='auto' />
+        <ThemeProvider theme={theme}>
+          <RestaurantsContextProvider>
+            <NavigationContainer>
+              <Tab.Navigator screenOptions={screenOptions}>
+                <Tab.Screen name='Restaurants' component={RestaurantsScreen} />
+                <Tab.Screen name='Map' component={MapScreen} />
+                <Tab.Screen name='Settings' component={SettingsScreen} />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </RestaurantsContextProvider>
+        </ThemeProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

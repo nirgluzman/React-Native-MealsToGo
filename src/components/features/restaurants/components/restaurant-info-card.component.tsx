@@ -19,34 +19,16 @@ import {
 import star from '../../../../../assets/star';
 import open from '../../../../../assets/open';
 
-interface Restaurant {
-  name: string;
-  icon: string;
-  photos: string[];
-  address: string;
-  isOpenNow: boolean;
-  rating: number;
-  isClosedTemporarily: boolean;
-}
+import { Restaurant } from '../../../../types/restaurant';
 
 interface RestaurantProps {
   restaurant: Restaurant;
 }
 
 export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
-  const {
-    name = 'Pizzesco',
-    icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-    photos = [
-      'https://lh3.googleusercontent.com/p/AF1QipNOm7YNlbBBuLr1TzTci8uys8nvIQfGxo8QkW41=w408-h240-k-no-pi-0-ya181.05489-ro-0-fo100',
-    ],
-    address = 'Rosenheimer Str. 12, 81669 München',
-    isOpenNow = true,
-    rating = 4,
-    isClosedTemporarily = true,
-  } = restaurant;
+  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily } = restaurant;
 
-  const ratingArray = Array.from(new Array(Math.floor(rating)));
+  const ratingArray = Array.from(new Array(Math.round(rating)));
 
   return (
     <RestaurantCard mode='elevated' elevation={5}>
