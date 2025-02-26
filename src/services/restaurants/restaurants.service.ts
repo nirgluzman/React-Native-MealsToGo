@@ -7,7 +7,7 @@ import { mocks, mockImages, type MockKeys, type MockData } from './mock'; // moc
 import type { Restaurant } from '../../types/restaurant';
 
 // function to fetch mock restaurant data based on a location.
-export const restaurantsRequest = (location: MockKeys = '37.7749295,-122.4194155') => {
+export const restaurantsRequest = (location: MockKeys) => {
   return new Promise((resolve, reject) => {
     const mock = mocks[location];
     if (!mock) {
