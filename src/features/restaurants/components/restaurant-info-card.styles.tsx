@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Theme } from '../../../../infrastructure/theme';
+import { Theme } from '../../../infrastructure/theme';
 import { Card } from 'react-native-paper';
 
 export const RestaurantCard = styled(Card)`

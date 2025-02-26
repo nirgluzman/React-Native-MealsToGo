@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 
 import styled from 'styled-components/native';
-import { theme } from '../../../../infrastructure/theme';
+import { theme } from '../../../infrastructure/theme';
 
 import {
   ActivityIndicator, // present progress of some activity in the app.
 } from 'react-native-paper';
 
-import { RestaurantsContext } from '../../../../services/restaurants/restaurants.context';
+import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 
-import { Spacer } from '../../../spacer/spacer.component';
+import { Spacer } from '../../../components/spacer/spacer.component';
 import { Search } from '../components/search.component';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 

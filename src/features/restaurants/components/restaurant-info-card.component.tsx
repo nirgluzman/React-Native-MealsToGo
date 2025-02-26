@@ -2,8 +2,8 @@ import {
   SvgXml, // render SVG content directly from an XML string or file.
 } from 'react-native-svg';
 
-import { Spacer } from '../../../spacer/spacer.component';
-import { Text } from '../../../typography/text.component';
+import { Spacer } from '../../../components/spacer/spacer.component';
+import { Text } from '../../../components/typography/text.component';
 
 import {
   RestaurantCard,
@@ -16,10 +16,10 @@ import {
   SectionEnd,
 } from './restaurant-info-card.styles';
 
-import star from '../../../../../assets/star';
-import open from '../../../../../assets/open';
+import star from '../../../../assets/star';
+import open from '../../../../assets/open';
 
-import { Restaurant } from '../../../../types/restaurant';
+import { Restaurant } from '../../../types/restaurant';
 
 interface RestaurantProps {
   restaurant: Restaurant;

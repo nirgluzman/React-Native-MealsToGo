@@ -28,9 +28,9 @@ import { theme } from './src/infrastructure/theme';
 import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
 import { LocationContextProvider } from './src/services/location/location.context';
 
-import { RestaurantsScreen } from './src/components/features/restaurants/screens/restaurants.screen';
-import { MapScreen } from './src/components/features/map/screens/map.screen';
-import { SettingsScreen } from './src/components/features/settings/screens/settings.screen';
+import { RestaurantsScreen } from './src/features/restaurants/screens/restaurants.screen';
+import { MapScreen } from './src/features/map/screens/map.screen';
+import { SettingsScreen } from './src/features/settings/screens/settings.screen';
 
 // typecheck for route name and params.
 // https://reactnavigation.org/docs/typescript/
