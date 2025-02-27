@@ -2,8 +2,8 @@
 
 ## GitHub repository
 
-- https://github.com/nirgluzman/React-Native-MealsToGo.git
-- https://github.com/mobinni/MealsToGo.git
+https://github.com/nirgluzman/React-Native-MealsToGo.git <br />
+https://github.com/mobinni/MealsToGo.git
 
 ## Architecture
 
@@ -29,8 +29,7 @@ yarn create expo-app --template blank-typescript
 
 ## Set up ESLint in VS Code for React Native applications that use TypeScript
 
-- https://typescript-eslint.io/
-- https://docs.expo.dev/guides/using-eslint/
+https://typescript-eslint.io/ <br /> https://docs.expo.dev/guides/using-eslint/
 
 - ESLint statically analyzes your code to quickly find problems.
 
@@ -59,7 +58,7 @@ yarn add -D @types/styled-components-react-native
 
 ## Safe Area Context
 
-https://docs.expo.dev/versions/latest/sdk/safe-area-context/
+https://docs.expo.dev/versions/latest/sdk/safe-area-context/ <br />
 https://docs.expo.dev/develop/user-interface/safe-areas/
 
 - Creating a safe area ensures your app screen's content is positioned correctly. This means it
@@ -111,3 +110,12 @@ https://reactnavigation.org/docs/typescript/
 
 - React Navigation can be configured to type-check screens and their params, as well as various
   other APIs using TypeScript.
+
+## React Native - TouchableOpacity vs. Pressable
+
+https://reactnative.dev/docs/touchableopacity <br /> https://reactnative.dev/docs/pressable
+
+- `TouchableOpacity` primarily focuses on providing visual feedback by reducing the opacity of the
+  component when it is pressed.
+- `Pressable` is a more versatile and highly customizable component that provides more control over
+  touch interactions.
