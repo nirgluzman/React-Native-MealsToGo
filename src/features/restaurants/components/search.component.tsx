@@ -14,8 +14,8 @@ const SearchContainer = styled.View`
 `;
 
 export const Search = () => {
-  const { search } = useContext(LocationContext);
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const { search, keyword } = useContext(LocationContext);
+  const [searchKeyword, setSearchKeyword] = useState<string>(keyword); // search keyword state, initially set to the context keyword.
 
   return (
     <SearchContainer>
