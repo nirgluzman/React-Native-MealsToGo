@@ -1,5 +1,9 @@
 import { useContext } from 'react';
 
+import {
+  TouchableOpacity, // interactive component that responds to user touch events (visual feedback by reducing the opacity of the component when it is pressed).
+} from 'react-native';
+
 import styled from 'styled-components/native';
 import { theme } from '../../../infrastructure/theme';
 
@@ -8,6 +12,9 @@ import {
 } from 'react-native-paper';
 
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
+
+import type { RestaurantsScreenProps } from '../../../types/navigation';
+import type { Restaurant } from '../../../types/restaurant';
 
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { Search } from '../components/search.component';
@@ -33,7 +40,7 @@ const RestaurantList = styled.FlatList.attrs({
     { padding: 16 },
 })``;
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }: RestaurantsScreenProps) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
 
   return (
@@ -46,11 +53,18 @@ export const RestaurantsScreen = () => {
       <Search />
       <RestaurantList
         data={restaurants}
-        keyExtractor={(item: any) => item.name}
-        renderItem={({ item }: { item: any }) => (
-          <Spacer position='bottom' size='medium'>
-            <RestaurantInfoCard restaurant={item} />
-          </Spacer>
+        keyExtractor={(item: Restaurant) => item.name}
+        renderItem={({ item }: { item: Restaurant }) => (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('RestaurantDetails', {
+                restaurant: item,
+              });
+            }}>
+            <Spacer position='bottom' size='large'>
+              <RestaurantInfoCard restaurant={item} />
+            </Spacer>
+          </TouchableOpacity>
         )}
         showsVerticalScrollIndicator={false}
       />
