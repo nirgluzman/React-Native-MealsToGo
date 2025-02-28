@@ -1,9 +1,11 @@
 //
 // This file defines the Bottom Tab Navigation structure of the app, connecting the main feature screens (Restaurants, Map, Settings).
+// This Navigator allows users to switch between exploring restaurants, viewing the map, and accessing app settings.
+// https://reactnavigation.org/docs/bottom-tab-navigator/
 //
 
-// Bottom Tabs Navigator
-import { NavigationContainer, type RouteProp } from '@react-navigation/native';
+// Bottom Tab Navigator (Root)
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // icon sets, https://expo.github.io/vector-icons/
@@ -12,32 +14,24 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { theme } from '../theme';
 
-import { RestaurantsScreen } from '../../features/restaurants/screens/restaurants.screen';
+import { RestaurantsNavigator } from './restaurants.navigator';
+import type { RootTabParamList, AnyTabScreenProps } from '../../types/navigation';
+
 import { MapScreen } from '../../features/map/screens/map.screen';
 import { SettingsScreen } from '../../features/settings/screens/settings.screen';
 
-// typecheck for route name and params.
-// https://reactnavigation.org/docs/typescript/
-type TabParamList = {
-  Restaurants: undefined; // specifying 'undefined' means that the route doesn't have params.
-  Map: undefined;
-  Settings: undefined;
-};
-
 // we tell our navigator to use typecheck by passing it as a generic.
-const Tab = createBottomTabNavigator<TabParamList>();
-
-// typecheck for screens - annotate the route props received by a screen.
-type RouteProps = RouteProp<TabParamList>;
+// this will provide type checking and intelliSense for props of the Navigator and Screen components.
+const RestaurantsTab = createBottomTabNavigator<RootTabParamList>();
 
 // define the icon mapping for the bottom tab navigator.
-const iconMap: Record<keyof TabParamList, keyof typeof Ionicons.glyphMap> = {
+const iconMap: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> = {
   Restaurants: 'restaurant',
   Map: 'map-outline',
   Settings: 'settings',
 } as const;
 
-const screenOptions = ({ route }: { route: RouteProps }) => {
+const screenOptions = ({ route }: AnyTabScreenProps) => {
   return {
     headerShown: false, // hide the header for all screens.
     tabBarIcon: ({ color, size }: { color: string; size: number }) => {
@@ -52,11 +46,11 @@ const screenOptions = ({ route }: { route: RouteProps }) => {
 export const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name='Restaurants' component={RestaurantsScreen} />
-        <Tab.Screen name='Map' component={MapScreen} />
-        <Tab.Screen name='Settings' component={SettingsScreen} />
-      </Tab.Navigator>
+      <RestaurantsTab.Navigator screenOptions={screenOptions}>
+        <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
+        <RestaurantsTab.Screen name='Map' component={MapScreen} />
+        <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
+      </RestaurantsTab.Navigator>
     </NavigationContainer>
   );
 };
