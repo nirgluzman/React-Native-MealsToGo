@@ -119,3 +119,13 @@ https://reactnative.dev/docs/touchableopacity <br /> https://reactnative.dev/doc
   component when it is pressed.
 - `Pressable` is a more versatile and highly customizable component that provides more control over
   touch interactions.
+
+## React Native Maps / MapView
+
+https://docs.expo.dev/versions/latest/sdk/map-view/ <br />
+https://github.com/react-native-maps/react-native-maps (full documentation)
+
+- A library that provides a Map component that uses Google Maps on Android and Apple Maps or Google
+  Maps on iOS.
+
+- No additional setup is required when testing your project using Expo Go.
