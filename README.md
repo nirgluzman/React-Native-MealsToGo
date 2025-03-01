@@ -27,6 +27,18 @@ yarn create expo-app --template blank-typescript
 
 ```
 
+## Expo Go
+
+https://expo.dev/go
+
+- Expo Go is a sandbox environment which enables you to quickly experiment with building native
+  Android and iOS apps.
+- Expo Go app comes with pre-installed commonly used libraries so you can quickly prototype and
+  develop your app.
+- **Expo Go Limitations** - we can only use libraries bundled in Expo Go !!
+- [React Native Directory](https://reactnative.directory/) to check if a library is compatible with
+  Expo Go.
+
 ## Set up ESLint in VS Code for React Native applications that use TypeScript
 
 https://typescript-eslint.io/ <br /> https://docs.expo.dev/guides/using-eslint/
