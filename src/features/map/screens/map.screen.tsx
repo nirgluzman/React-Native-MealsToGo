@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import MapView, { type Region } from 'react-native-maps';
+import MapView, { Marker, type Region } from 'react-native-maps';
 import styled from 'styled-components/native';
 
 import { LocationContext } from '../../../services/location/location.context';
+import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 
 import { Search } from '../components/search.component';
 
@@ -14,6 +15,8 @@ const Map = styled(MapView)`
 export const MapScreen = () => {
   const { location } = useContext(LocationContext);
   const [mapRegion, setMapRegion] = useState<Region | null>(null);
+
+  const { restaurants } = useContext(RestaurantsContext);
 
   useEffect(() => {
     if (!location) {
@@ -41,7 +44,20 @@ export const MapScreen = () => {
   return (
     <>
       <Search />
-      {mapRegion && <Map region={mapRegion}></Map>}
+      {mapRegion && (
+        <Map region={mapRegion}>
+          {restaurants.map((restaurant) => (
+            <Marker
+              key={restaurant.name}
+              title={restaurant.name}
+              coordinate={{
+                latitude: restaurant.geometry.location.lat,
+                longitude: restaurant.geometry.location.lng,
+              }}
+            />
+          ))}
+        </Map>
+      )}
     </>
   );
 };
