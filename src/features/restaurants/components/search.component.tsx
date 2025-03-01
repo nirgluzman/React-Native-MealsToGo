@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import styled from 'styled-components/native';
 import { theme, type Theme } from '../../../infrastructure/theme';
@@ -16,6 +16,13 @@ const SearchContainer = styled.View`
 export const Search = () => {
   const { search, keyword } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState<string>(keyword); // search keyword state, initially set to the context keyword.
+
+  // synchronize the local searchKeyword state with the keyword value from the LocationContext.
+  // if the keyword value in the LocationContext is updated from a different screen, this useEffect hook ensures
+  // that the searchKeyword state in this Search component is automatically updated to reflect that change.
+  useEffect(() => {
+    setSearchKeyword(keyword);
+  }, [keyword]);
 
   return (
     <SearchContainer>
