@@ -128,4 +128,12 @@ https://github.com/react-native-maps/react-native-maps (full documentation)
 - A library that provides a Map component that uses Google Maps on Android and Apple Maps or Google
   Maps on iOS.
 
-- No additional setup is required when testing your project using Expo Go.
+- **Note:** Currently, `react-native-maps` does not support the New Architecture (SDK 52 or newer) !
+
+https://github.com/react-native-maps/react-native-maps/issues/5236
+
+- **Solution:** Disable the New Architecture (`newArchEnabled: false`) in `app.json` and create a
+  development build. As we create our own custom build, we must to configure the Google Maps API key
+  within `android.config.googleMaps.apiKey` field.
+
+https://docs.expo.dev/develop/development-builds/create-a-build/
