@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
-import MapView, { Marker, type Region } from 'react-native-maps';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE, type Region } from 'react-native-maps';
 import styled from 'styled-components/native';
 
 import { LocationContext } from '../../../services/location/location.context';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 
 import { Search } from '../components/search.component';
+import { MapCallout } from '../components/map-callout.component';
 
 const Map = styled(MapView)`
   width: 100%;
@@ -45,7 +46,7 @@ export const MapScreen = () => {
     <>
       <Search />
       {mapRegion && (
-        <Map region={mapRegion}>
+        <Map provider={PROVIDER_GOOGLE} region={mapRegion}>
           {restaurants.map((restaurant) => (
             <Marker
               key={restaurant.name}
@@ -53,8 +54,11 @@ export const MapScreen = () => {
               coordinate={{
                 latitude: restaurant.geometry.location.lat,
                 longitude: restaurant.geometry.location.lng,
-              }}
-            />
+              }}>
+              <Callout>
+                <MapCallout restaurant={restaurant} />
+              </Callout>
+            </Marker>
           ))}
         </Map>
       )}
