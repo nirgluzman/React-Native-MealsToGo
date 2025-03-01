@@ -19,6 +19,7 @@ export const locationRequest = (searchTerm: LocationMockKeys) => {
 export const locationTransform = ({ results }: { results: LocationMockData['results'] }) => {
   const { geometry } = camelize(results)[0]; // convert all property names to camelCase format.
   const { lat, lng } = geometry.location;
+  const { viewport } = geometry;
 
-  return { lat, lng };
+  return { center: { lat, lng }, viewport };
 };

@@ -19,7 +19,10 @@ type LocationContextType = {
 
 // create context with proper typing and default value
 export const LocationContext = createContext<LocationContextType>({
-  location: { lat: 0, lng: 0 },
+  location: {
+    center: { lat: 0, lng: 0 },
+    viewport: { northeast: { lat: 0, lng: 0 }, southwest: { lat: 0, lng: 0 } },
+  },
   keyword: '',
   search: () => {},
   isLoading: false,

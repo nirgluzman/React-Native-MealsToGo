@@ -35,12 +35,12 @@ export const RestaurantsContextProvider = ({ children }: { children: ReactNode }
 
   const fetchRestaurants = async (location: Location | null) => {
     // skip if location or coordinates are missing.
-    if (!location?.lat || !location?.lng) {
+    if (!location?.center.lat || !location?.center.lng) {
       return;
     }
 
     // create location string from coordinates.
-    const { lat, lng } = location;
+    const { lat, lng } = location.center;
     const locationString = `${lat},${lng}`;
 
     setRestaurants([]);
