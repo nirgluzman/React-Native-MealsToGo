@@ -32,11 +32,12 @@ const isAndroid = Platform.OS === 'android';
 
 export const RestaurantInfoCompact = ({
   restaurant,
+  isMap, // Image should be displayed in WebView only within the MapView.
 }: {
   restaurant: Restaurant;
   isMap: boolean;
 }) => {
-  const Image = isAndroid ? CompactWebView : CompactImage;
+  const Image = isAndroid && isMap ? CompactWebView : CompactImage;
 
   return (
     <Item>
