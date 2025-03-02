@@ -54,6 +54,25 @@ https://callstack.github.io/react-native-paper/
 - Convert CSS to React Native stylesheet object,
   https://github.com/styled-components/css-to-react-native
 
+## React Native Maps / MapView
+
+https://docs.expo.dev/versions/latest/sdk/map-view/ <br />
+https://github.com/react-native-maps/react-native-maps (full documentation)
+
+- A library that provides a Map component that uses Google Maps on Android and Apple Maps or Google
+  Maps on iOS.
+
+- **Note:** Currently, `react-native-maps` does not support the New Architecture (SDK 52 or newer) !
+
+- **Solution:** Disable the New Architecture (`newArchEnabled: false`) in `app.json` and create a
+  [development build](https://docs.expo.dev/develop/development-builds/create-a-build/). As we
+  create our own custom build, we must to configure the Google Maps API key within
+  `android.config.googleMaps.apiKey` field.
+
+[Android callouts are cut off](https://github.com/react-native-maps/react-native-maps/issues/5216)
+<br />
+[Android map not working correctly](https://github.com/react-native-maps/react-native-maps/issues/5236)
+
 ## Styled Components (React and React Native)
 
 https://styled-components.com/
@@ -91,22 +110,6 @@ https://reactnative.dev/docs/statusbar
 - E.g. `currentHeight` returns the height of the status bar (only in Android; returns `null` in
   iOS).
 
-## Layout with Flexbox
-
-https://reactnative.dev/docs/flexbox#flex
-
-## Rendering lists - FlatList & ScrollView
-
-https://reactnative.dev/docs/flatlist <br /> https://reactnative.dev/docs/scrollview
-
-- `FlatList` is a component optimized for handling large lists of data; it efficiently renders only
-  the visible items on the screen, conserving memory and improving performance.
-- The `FlatList` component also provides scrolling, pull-to-refresh, and item selection features.
-- A `ScrollView` is a scrolling container, but it's not ideal as a container for mapping over a
-  large collection of list items. This is because it will render the entire list of elements whether
-  they're on-screen or not. A `FlatList` component only renders items on screen, which helps improve
-  app performance for long lists.
-
 ## React Navigation
 
 https://reactnavigation.org/
@@ -123,6 +126,10 @@ https://reactnavigation.org/docs/typescript/
 - React Navigation can be configured to type-check screens and their params, as well as various
   other APIs using TypeScript.
 
+## Layout with Flexbox
+
+https://reactnative.dev/docs/flexbox#flex
+
 ## React Native - TouchableOpacity vs. Pressable
 
 https://reactnative.dev/docs/touchableopacity <br /> https://reactnative.dev/docs/pressable
@@ -132,20 +139,21 @@ https://reactnative.dev/docs/touchableopacity <br /> https://reactnative.dev/doc
 - `Pressable` is a more versatile and highly customizable component that provides more control over
   touch interactions.
 
-## React Native Maps / MapView
+## Rendering lists - FlatList & ScrollView
 
-https://docs.expo.dev/versions/latest/sdk/map-view/ <br />
-https://github.com/react-native-maps/react-native-maps (full documentation)
+https://reactnative.dev/docs/flatlist <br /> https://reactnative.dev/docs/scrollview
 
-- A library that provides a Map component that uses Google Maps on Android and Apple Maps or Google
-  Maps on iOS.
+- `FlatList` is a component optimized for handling large lists of data; it efficiently renders only
+  the visible items on the screen, conserving memory and improving performance.
+- The `FlatList` component also provides scrolling, pull-to-refresh, and item selection features.
+- A `ScrollView` is a scrolling container, but it's not ideal as a container for mapping over a
+  large collection of list items. This is because it will render the entire list of elements whether
+  they're on-screen or not. A `FlatList` component only renders items on screen, which helps improve
+  app performance for long lists.
 
-- **Note:** Currently, `react-native-maps` does not support the New Architecture (SDK 52 or newer) !
+## Expo Vector Icons
 
-https://github.com/react-native-maps/react-native-maps/issues/5236
+https://docs.expo.dev/guides/icons/
 
-- **Solution:** Disable the New Architecture (`newArchEnabled: false`) in `app.json` and create a
-  development build. As we create our own custom build, we must to configure the Google Maps API key
-  within `android.config.googleMaps.apiKey` field.
-
-https://docs.expo.dev/develop/development-builds/create-a-build/
+- The `@expo/vector-icons` library is installed by default and it includes popular icon sets from
+  https://icons.expo.fyi/
