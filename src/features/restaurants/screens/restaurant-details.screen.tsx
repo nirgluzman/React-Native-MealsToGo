@@ -6,11 +6,16 @@ import {
   List, // expandable list component, https://callstack.github.io/react-native-paper/docs/components/List/ListAccordion/
 } from 'react-native-paper';
 
+// typecheck for screens - annotate the route props received by a screen.
+import type { RestaurantDetailsScreenProps } from '../../../types/navigation';
+
 import { theme, type Theme } from '../../../infrastructure/theme';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 
-// typecheck for screens - annotate the route props received by a screen.
-import type { RestaurantDetailsScreenProps } from '../../../types/navigation';
+const MenuScrollView = styled.ScrollView`
+  background-color: ${({ theme }: { theme: Theme }) => theme.colors.bg.primary};
+  border-radius: 10px;
+`;
 
 export const RestaurantDetailsScreen = ({ route }: RestaurantDetailsScreenProps) => {
   const { restaurant } = route.params;
@@ -20,11 +25,6 @@ export const RestaurantDetailsScreen = ({ route }: RestaurantDetailsScreenProps)
   const [lunchExpanded, setLunchExpanded] = useState<boolean>(false);
   const [dinnerExpanded, setDinnerExpanded] = useState<boolean>(false);
   const [drinksExpanded, setDrinksExpanded] = useState<boolean>(false);
-
-  const MenuScrollView = styled.ScrollView`
-    background-color: ${({ theme }: { theme: Theme }) => theme.colors.bg.primary};
-    border-radius: 10px;
-  `;
 
   return (
     <>

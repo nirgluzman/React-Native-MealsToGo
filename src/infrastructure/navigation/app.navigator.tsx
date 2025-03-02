@@ -6,7 +6,11 @@
 
 // Bottom Tab Navigator (Root)
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  type BottomTabOptionsArgs,
+  type BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
 
 // icon sets, https://expo.github.io/vector-icons/
 // library is installed by default on the template project.
@@ -14,10 +18,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { theme } from '../theme';
 
-import { RestaurantsNavigator } from './restaurants.navigator';
-import type { RootTabParamList, AnyTabScreenProps } from '../../types/navigation';
+import type { RootTabParamList } from '../../types/navigation';
 
-import { MapScreen } from '../../features/map/screens/map.screen';
+import { RestaurantsNavigator } from './restaurants.navigator';
+import { MapNavigator } from './map.navigator';
+
 import { SettingsScreen } from '../../features/settings/screens/settings.screen';
 
 // we tell our navigator to use typecheck by passing it as a generic.
@@ -31,7 +36,10 @@ const iconMap: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> = 
   Settings: 'settings',
 } as const;
 
-const screenOptions = ({ route }: AnyTabScreenProps) => {
+const screenOptions = ({
+  route,
+}: BottomTabOptionsArgs<RootTabParamList>): BottomTabNavigationOptions => {
+  // https://reactnavigation.org/docs/typescript/#annotating-options-and-screenoptions
   return {
     headerShown: false, // hide the header for all screens.
     tabBarIcon: ({ color, size }: { color: string; size: number }) => {
@@ -48,7 +56,7 @@ export const AppNavigator = () => {
     <NavigationContainer>
       <RestaurantsTab.Navigator screenOptions={screenOptions}>
         <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
-        <RestaurantsTab.Screen name='Map' component={MapScreen} />
+        <RestaurantsTab.Screen name='Map' component={MapNavigator} />
         <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
       </RestaurantsTab.Navigator>
     </NavigationContainer>

@@ -11,10 +11,10 @@ import {
   ActivityIndicator, // present progress of some activity in the app.
 } from 'react-native-paper';
 
-import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
-
-import type { RestaurantsScreenProps } from '../../../types/navigation';
+import type { RestaurantsStackScreenProps } from '../../../types/navigation';
 import type { Restaurant } from '../../../types/restaurant';
+
+import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { Search } from '../components/search.component';
@@ -40,7 +40,9 @@ const RestaurantList = styled.FlatList.attrs({
     { padding: 16 },
 })``;
 
-export const RestaurantsScreen = ({ navigation }: RestaurantsScreenProps) => {
+export const RestaurantsScreen = ({
+  navigation,
+}: RestaurantsStackScreenProps<'RestaurantsList'>) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
 
   return (

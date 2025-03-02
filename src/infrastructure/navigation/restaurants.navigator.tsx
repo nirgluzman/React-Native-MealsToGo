@@ -9,14 +9,14 @@ import {
   TransitionPresets, // pre-defined configurations for screen transition animations within the Stack Navigator.
 } from '@react-navigation/stack';
 
-import type { StackParamList } from '../../types/navigation';
+import type { RestaurantsStackParamList } from '../../types/navigation';
 
 import { RestaurantsScreen } from '../../features/restaurants/screens/restaurants.screen';
 import { RestaurantDetailsScreen } from '../../features/restaurants/screens/restaurant-details.screen';
 
 // we tell our navigator to use typecheck by passing it as a generic.
 // this will provide type checking and intelliSense for props of the Navigator and Screen components.
-const RestaurantStack = createStackNavigator<StackParamList>();
+const RestaurantStack = createStackNavigator<RestaurantsStackParamList>();
 
 export const RestaurantsNavigator = () => {
   return (
