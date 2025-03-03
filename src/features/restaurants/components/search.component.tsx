@@ -13,7 +13,13 @@ const SearchContainer = styled.View`
   padding: ${({ theme }: { theme: Theme }) => theme.space[3]};
 `;
 
-export const Search = () => {
+export const Search = ({
+  isFavouritesToggled,
+  onFavouritesToggle,
+}: {
+  isFavouritesToggled: boolean;
+  onFavouritesToggle: () => void;
+}) => {
   const { search, keyword } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState<string>(keyword); // search keyword state, initially set to the context keyword.
 
@@ -31,7 +37,8 @@ export const Search = () => {
         onChangeText={setSearchKeyword}
         value={searchKeyword}
         onSubmitEditing={() => search(searchKeyword)} // search function is called when the user submits the search query (the user presses the "Enter" or "Return" key on their keyboard).
-        onIconPress={() => search(searchKeyword)} // search function is called when the user presses the search icon.
+        icon={isFavouritesToggled ? 'heart' : 'heart-outline'}
+        onIconPress={onFavouritesToggle} // when the heart icon is pressed, toggle the display of the user's favorites.
         onClearIconPress={() => setSearchKeyword('')} // clear the search query when the user presses the clear icon.
         style={{ backgroundColor: theme.colors.bg.tertiary }}
       />
