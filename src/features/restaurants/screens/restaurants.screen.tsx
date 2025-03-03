@@ -60,7 +60,9 @@ export const RestaurantsScreen = ({
         isFavouritesToggled={displayFavourites}
         onFavouritesToggle={() => setDisplayFavourites((prev) => !prev)}
       />
-      {displayFavourites && <FavouritesBar favourites={favourites} />}
+      {displayFavourites && (
+        <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+      )}
       <RestaurantList
         data={restaurants}
         keyExtractor={(item: Restaurant) => item.name}
