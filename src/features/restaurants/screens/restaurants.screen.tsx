@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import {
   TouchableOpacity, // interactive component that responds to user touch events (visual feedback by reducing the opacity of the component when it is pressed).
@@ -15,8 +15,10 @@ import type { RestaurantsStackScreenProps } from '../../../types/navigation';
 import type { Restaurant } from '../../../types/restaurant';
 
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
+import { FavouritesContext } from '../../../services/favourites/favourites.context';
 
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 import { Search } from '../components/search.component';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 
@@ -43,7 +45,9 @@ const RestaurantList = styled.FlatList.attrs({
 export const RestaurantsScreen = ({
   navigation,
 }: RestaurantsStackScreenProps<'RestaurantsList'>) => {
+  const [displayFavourites, setDisplayFavourites] = useState<boolean>(false);
   const { restaurants, isLoading } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
 
   return (
     <>
@@ -52,7 +56,11 @@ export const RestaurantsScreen = ({
           <Loading animating={true} color={theme.colors.ui.success} size={50} />
         </LoadingContainer>
       )}
-      <Search />
+      <Search
+        isFavouritesToggled={displayFavourites}
+        onFavouritesToggle={() => setDisplayFavourites((prev) => !prev)}
+      />
+      {displayFavourites && <FavouritesBar favourites={favourites} />}
       <RestaurantList
         data={restaurants}
         keyExtractor={(item: Restaurant) => item.name}
