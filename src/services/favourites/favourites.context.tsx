@@ -2,7 +2,9 @@
 // React Context to manage the user's list of favorite restaurants.
 //
 
-import { useState, createContext, type ReactNode } from 'react';
+import { useState, useEffect, createContext, type ReactNode } from 'react';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Restaurant } from '../../types/restaurant';
 
@@ -33,6 +35,39 @@ export const FavouritesContextProvider = ({ children }: { children: ReactNode })
     const newFavourites = favourites.filter((fav) => fav.placeId !== restaurant.placeId);
     setFavourites(newFavourites);
   };
+
+  // Load the user's favorite restaurants from persistent storage when the component first mounts.
+  // This ensures that favorites are restored after the app is closed and reopened.
+  useEffect(() => {
+    // retrieve the stored favourites data from AsyncStorage.
+    const loadFavourites = async () => {
+      try {
+        const value = await AsyncStorage.getItem('@favourites');
+        if (value !== null) {
+          setFavourites(JSON.parse(value));
+        }
+      } catch (err) {
+        console.log('error loading favourites', err);
+      }
+    };
+
+    loadFavourites();
+  }, []);
+
+  // Save the user's favorite restaurants to persistent storage whenever the favorites list changes.
+  // This ensures that any changes to favorites are persisted.
+  useEffect(() => {
+    // convert the current favourites array into a JSON string and store it in AsyncStorage.
+    const saveFavourites = async (value: Restaurant[]) => {
+      try {
+        await AsyncStorage.setItem('@favourites', JSON.stringify(value));
+      } catch (err) {
+        console.log('error saving favourites', err);
+      }
+    };
+
+    saveFavourites(favourites);
+  }, [favourites]);
 
   return (
     <FavouritesContext.Provider
