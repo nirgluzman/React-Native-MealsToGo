@@ -126,6 +126,16 @@ https://reactnavigation.org/docs/typescript/
 - React Navigation can be configured to type-check screens and their params, as well as various
   other APIs using TypeScript.
 
+## Async Storage - Persist data locally on the user's device
+
+https://react-native-async-storage.github.io/async-storage/ </br>
+https://github.com/react-native-async-storage/async-storage
+
+- Asynchronous, unencrypted, persistent, key-value storage solution for your React Native
+  application.
+- Async Storage can only store string data. In order to store object data, you need to serialize it
+  first.
+
 ## Layout with Flexbox
 
 https://reactnative.dev/docs/flexbox#flex
