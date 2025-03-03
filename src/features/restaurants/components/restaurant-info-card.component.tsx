@@ -2,8 +2,11 @@ import {
   SvgXml, // render SVG content directly from an XML string or file.
 } from 'react-native-svg';
 
+import type { Restaurant } from '../../../types/restaurant';
+
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { Text } from '../../../components/typography/text.component';
+import { Favourite } from '../../../components/favourites/favourite.component';
 
 import {
   RestaurantCard,
@@ -19,13 +22,7 @@ import {
 import star from '../../../../assets/star';
 import open from '../../../../assets/open';
 
-import { Restaurant } from '../../../types/restaurant';
-
-interface RestaurantProps {
-  restaurant: Restaurant;
-}
-
-export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
+export const RestaurantInfoCard = ({ restaurant }: { restaurant: Restaurant }) => {
   const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily, placeId } =
     restaurant;
 
@@ -33,6 +30,7 @@ export const RestaurantInfoCard = ({ restaurant }: RestaurantProps) => {
 
   return (
     <RestaurantCard mode='elevated' elevation={5}>
+      <Favourite restaurant={restaurant} />
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant='label'>{name}</Text>
