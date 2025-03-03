@@ -45,14 +45,50 @@ https://typescript-eslint.io/ <br /> https://docs.expo.dev/guides/using-eslint/
 
 - ESLint statically analyzes your code to quickly find problems.
 
+## Using Firebase with Expo
+
+https://docs.expo.dev/guides/using-firebase/
+
+- [Firebase](https://firebase.google.com/) is a Backend-as-a-Service (BaaS) app development platform
+  that provides hosted backend services such as real-time database, cloud storage, authentication,
+  crash reporting, analytics, and so on. It is built on Google's infrastructure and scales
+  automatically.
+
+- There are two different ways we can use Firebase in our projects:
+
+  (\*) Using Firebase JS SDK -> for developing an app with Expo Go! <br /> (\*) Using React Native
+  Firebase
+
 ## React Native Paper
 
 https://callstack.github.io/react-native-paper/
 
 - A collection of customizable and production-ready components for React Native, following Google’s
   Material Design guidelines.
-- Convert CSS to React Native stylesheet object,
-  https://github.com/styled-components/css-to-react-native
+- [Configuring icons](https://callstack.github.io/react-native-paper/docs/guides/icons/#configuring-icons) -
+  many components such as Button accept an icon prop which is used to display an icon.
+
+## Styled Components (React and React Native)
+
+https://styled-components.com/
+
+- `Styled-Components` is a library for React that allows you to write your CSS directly in your
+  javascript.
+- [Convert CSS to React Native stylesheet object](https://github.com/styled-components/css-to-react-native)
+- `yarn` is required for installation, as it seems that `npm` does not work correctly for this
+  package.
+
+```bash
+yarn add styled-components
+yarn add -D @types/styled-components-react-native
+```
+
+## Expo Vector Icons
+
+https://docs.expo.dev/guides/icons/
+
+- The `@expo/vector-icons` library is installed by default and it includes popular icon sets from
+  https://icons.expo.fyi/
 
 ## React Native Maps / MapView
 
@@ -72,20 +108,6 @@ https://github.com/react-native-maps/react-native-maps (full documentation)
 [Android callouts are cut off](https://github.com/react-native-maps/react-native-maps/issues/5216)
 <br />
 [Android map not working correctly](https://github.com/react-native-maps/react-native-maps/issues/5236)
-
-## Styled Components (React and React Native)
-
-https://styled-components.com/
-
-- `Styled-Components` is a library for React that allows you to write your CSS directly in your
-  javascript.
-- `yarn` is required for installation, as it seems that `npm` does not work correctly for this
-  package.
-
-```bash
-yarn add styled-components
-yarn add -D @types/styled-components-react-native
-```
 
 ## Safe Area Context
 
@@ -160,10 +182,3 @@ https://reactnative.dev/docs/flatlist <br /> https://reactnative.dev/docs/scroll
   large collection of list items. This is because it will render the entire list of elements whether
   they're on-screen or not. A `FlatList` component only renders items on screen, which helps improve
   app performance for long lists.
-
-## Expo Vector Icons
-
-https://docs.expo.dev/guides/icons/
-
-- The `@expo/vector-icons` library is installed by default and it includes popular icon sets from
-  https://icons.expo.fyi/
