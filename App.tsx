@@ -21,6 +21,7 @@ import {
 
 import { theme } from './src/infrastructure/theme';
 
+import { AuthContextProvider } from './src/services/auth/auth.context';
 import { LocationContextProvider } from './src/services/location/location.context';
 import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
 import { FavouritesContextProvider } from './src/services/favourites/favourites.context';
@@ -44,13 +45,15 @@ export default function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar style='auto' />
         <ThemeProvider theme={theme}>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <FavouritesContextProvider>
-                <Navigation />
-              </FavouritesContextProvider>
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
+          <AuthContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <FavouritesContextProvider>
+                  <Navigation />
+                </FavouritesContextProvider>
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </AuthContextProvider>
         </ThemeProvider>
       </SafeAreaView>
     </SafeAreaProvider>
