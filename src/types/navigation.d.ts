@@ -13,6 +13,8 @@ import type { StackNavigationProp, StackScreenProps } from '@react-navigation/st
 import type { Restaurant } from './restaurant';
 
 //
+// Account Stack Navigator: manages user authentication and access to the application.
+//
 // Bottom Tab Navigator (Root): primary navigation structure of the app.
 // Allows users to switch between exploring restaurants, viewing the map, and accessing app settings.
 //
@@ -25,6 +27,12 @@ import type { Restaurant } from './restaurant';
 //
 
 // ParamList - mappings for route names to the params of the route (i.e. possible route names and their corresponding params).
+export type AccountStackParamList = {
+  Main: undefined; // specifying 'undefined' means that the route doesn't have params.
+  Login: undefined;
+  Register: undefined;
+};
+
 export type RootTabParamList = {
   Restaurants: NavigatorScreenParams<RestaurantsStackParamList>; // tab contains a nested navigator.
   Map: NavigatorScreenParams<MapStackParamList>; // tab contains a nested navigator.
@@ -40,6 +48,24 @@ export type MapStackParamList = {
   MapView: undefined; // specifying 'undefined' means that the route doesn't have params.
   RestaurantDetails: { restaurant: Restaurant };
 };
+
+// Account Stack Navigator props
+export type AccountStackScreenProps<RouteName extends keyof AccountStackParamList> =
+  StackScreenProps<
+    AccountStackParamList,
+    RouteName // name of the route the screen belongs to.
+  >;
+
+export type AccountStackRouteProps<RouteName extends keyof AccountStackParamList> = RouteProp<
+  AccountStackParamList,
+  RouteName // name of the route the screen belongs to.
+>;
+
+export type AccountStackNavigationProps<RouteName extends keyof AccountStackParamList> =
+  StackNavigationProp<
+    AccountStackParamList,
+    RouteName // name of the route the screen belongs to.
+  >;
 
 // Root Tab Navigator props
 export type RootTabScreenProps<RouteName extends keyof RootTabParamList> = BottomTabScreenProps<
