@@ -5,7 +5,6 @@
 //
 
 // Bottom Tab Navigator (Root)
-import { NavigationContainer } from '@react-navigation/native';
 import {
   createBottomTabNavigator,
   type BottomTabOptionsArgs,
@@ -53,12 +52,10 @@ const screenOptions = ({
 
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <RestaurantsTab.Navigator screenOptions={screenOptions}>
-        <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
-        <RestaurantsTab.Screen name='Map' component={MapNavigator} />
-        <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
-      </RestaurantsTab.Navigator>
-    </NavigationContainer>
+    <RestaurantsTab.Navigator screenOptions={screenOptions}>
+      <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
+      <RestaurantsTab.Screen name='Map' component={MapNavigator} />
+      <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
+    </RestaurantsTab.Navigator>
   );
 };
