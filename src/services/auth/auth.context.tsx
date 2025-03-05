@@ -5,6 +5,7 @@
 import { useState, useEffect, createContext, type ReactNode } from 'react';
 
 import { type User as FirebaseUser } from 'firebase/auth';
+import { FirebaseError } from '@firebase/util'; // subclass of the standard JavaScript Error object. In addition to a message string and stack trace, it contains a string code.
 
 import { listenAuthState, loginRequest } from './auth.service';
 
@@ -14,7 +15,7 @@ type AuthContextType = {
   isAuthenticated: boolean;
   onLogin: (email: string, password: string) => Promise<void>;
   isLoading: boolean;
-  error: Error | null;
+  error: string | null;
 };
 
 // create context with proper typing and default value.
@@ -30,7 +31,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const onLogin = async (email: string, password: string) => {
     setIsLoading(true); // display a loading indicator to the user while the data is being fetched.
@@ -39,7 +40,11 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       const { user: currentUser } = await loginRequest(email, password);
       setUser(currentUser);
     } catch (err) {
-      setError(err instanceof Error ? err : new Error(String(err)));
+      if (err instanceof FirebaseError) {
+        setError(err.code);
+      } else {
+        setError('An unexpected error occurred.');
+      }
     } finally {
       setIsLoading(false);
     }
