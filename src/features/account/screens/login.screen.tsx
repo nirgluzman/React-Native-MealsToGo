@@ -8,6 +8,7 @@ import {
   AccountContainer,
   AuthButton,
   AuthInput,
+  ErrorContainer,
 } from '../components/account.styles';
 
 import { Text } from '../../../components/typography/text.component';
@@ -26,22 +27,25 @@ export const LoginScreen = () => {
         <AuthInput
           label='Email' // the text or component to use for the floating label.
           value={email} // value of the text input.
-          textContentType='emailAddress'
-          keyboardType='email-address'
-          autoCapitalize='none'
-          onChangeText={(t: string) => setEmail(t)} // callback that is called when the text input's text changes.
+          textContentType='emailAddress' // give info about the expected semantic meaning for the content that users enters.
+          keyboardType='email-address' // determines which keyboard to open.
+          autoCapitalize='none' // don't automatically capitalize certain characters.
+          onChangeText={(u: string) => setEmail(u)} // callback that is called when the text input's text changes.
         />
         <Spacer size='large' />
         <AuthInput
           label='Password'
           value={password}
           textContentType='password'
-          secureTextEntry
+          secureTextEntry // if true, the text input obscures the text entered so that sensitive text like passwords stay secure.
           autoCapitalize='none'
-          secure
-          onChangeText={(t: string) => setPassword(t)}
+          onChangeText={(p: string) => setPassword(p)}
         />
-        <Spacer size='large'>{error && <Text variant='error'>{error.message}</Text>}</Spacer>
+        {error && (
+          <ErrorContainer size='large'>
+            <Text variant='error'>{error}</Text>
+          </ErrorContainer>
+        )}
         <AuthButton icon='login' onPress={() => onLogin(email, password)}>
           Login
         </AuthButton>
