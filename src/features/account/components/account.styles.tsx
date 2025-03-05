@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Button } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 
 import type { Theme } from '../../../infrastructure/theme';
 import { colors } from '../../../infrastructure/theme/colors';
@@ -37,4 +37,15 @@ export const AuthButton = styled(Button).attrs({
 })`
   padding: ${({ theme }: { theme: Theme }) => theme.space[2]};
   margin: ${({ theme }: { theme: Theme }) => theme.space[2]};
+`;
+
+// styled React Native Paper input text.
+export const AuthInput = styled(TextInput).attrs({
+  mode: 'outlined', // input styling.
+  selectionColor: colors.brand.primary, // selection color of the input.
+  outlineColor: colors.brand.muted, // inactive outline color of the input.
+  activeOutlineColor: colors.brand.primary, // active outline color of the input.
+  textColor: colors.text.primary, // color of the text in the input.
+})`
+  width: 300px;
 `;
