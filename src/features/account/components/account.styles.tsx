@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Button, TextInput } from 'react-native-paper';
+import { Button, Text, TextInput } from 'react-native-paper';
 
 import type { Theme } from '../../../infrastructure/theme';
 import { colors } from '../../../infrastructure/theme/colors';
@@ -48,4 +48,18 @@ export const AuthInput = styled(TextInput).attrs({
   textColor: colors.text.primary, // color of the text in the input.
 })`
   width: 300px;
+`;
+
+export const Title = styled(Text)`
+  font-size: ${({ theme }: { theme: Theme }) => theme.fontSizes.h2};
+  font-family: ${({ theme }: { theme: Theme }) => theme.fonts.body};
+  color: ${({ theme }: { theme: Theme }) => theme.colors.text.primary};
+`;
+
+export const ErrorContainer = styled.View`
+  max-width: 300px;
+  align-items: center;
+  align-self: center;
+  margin-top: ${({ theme }: { theme: Theme }) => theme.space[2]};
+  margin-bottom: ${({ theme }: { theme: Theme }) => theme.space[2]};
 `;
