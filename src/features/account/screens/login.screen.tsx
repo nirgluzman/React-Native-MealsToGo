@@ -8,6 +8,7 @@ import {
   AccountContainer,
   AuthButton,
   AuthInput,
+  ErrorContainer,
 } from '../components/account.styles';
 
 import { Text } from '../../../components/typography/text.component';
@@ -29,7 +30,7 @@ export const LoginScreen = () => {
           textContentType='emailAddress'
           keyboardType='email-address'
           autoCapitalize='none'
-          onChangeText={(t: string) => setEmail(t)} // callback that is called when the text input's text changes.
+          onChangeText={(u: string) => setEmail(u)} // callback that is called when the text input's text changes.
         />
         <Spacer size='large' />
         <AuthInput
@@ -39,9 +40,13 @@ export const LoginScreen = () => {
           secureTextEntry
           autoCapitalize='none'
           secure
-          onChangeText={(t: string) => setPassword(t)}
+          onChangeText={(p: string) => setPassword(p)}
         />
-        <Spacer size='large'>{error && <Text variant='error'>{error.message}</Text>}</Spacer>
+        {error && (
+          <ErrorContainer size='large'>
+            <Text variant='error'>{error}</Text>
+          </ErrorContainer>
+        )}
         <AuthButton icon='login' onPress={() => onLogin(email, password)}>
           Login
         </AuthButton>
