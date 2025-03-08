@@ -7,13 +7,14 @@ import { useState, useEffect, createContext, type ReactNode } from 'react';
 import { type User as FirebaseUser } from 'firebase/auth';
 import { FirebaseError } from '@firebase/util'; // subclass of the standard JavaScript Error object. In addition to a message string and stack trace, it contains a string code.
 
-import { listenAuthState, loginRequest } from './auth.service';
+import { listenAuthState, loginRequest, registerRequest } from './auth.service';
 
 // define the context value type.
 type AuthContextType = {
   user: FirebaseUser | null;
   isAuthenticated: boolean;
   onLogin: (email: string, password: string) => Promise<void>;
+  onRegister: (email: string, password: string, repeatedPassword: string) => Promise<void>;
   isLoading: boolean;
   error: string | null;
 };
@@ -23,6 +24,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false,
   onLogin: async () => {},
+  onRegister: async () => {},
   isLoading: false,
   error: null,
 });
@@ -34,16 +36,38 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
 
   const onLogin = async (email: string, password: string) => {
-    setIsLoading(true); // display a loading indicator to the user while the data is being fetched.
+    setIsLoading(true);
     setError(null);
     try {
       const { user: currentUser } = await loginRequest(email, password);
       setUser(currentUser);
     } catch (err) {
       if (err instanceof FirebaseError) {
-        setError(err.code);
+        setError(err.message);
       } else {
-        setError('An unexpected error occurred.');
+        setError('An unexpected error occurred');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onRegister = async (email: string, password: string, repeatedPassword: string) => {
+    if (password !== repeatedPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    try {
+      const { user: currentUser } = await registerRequest(email, password);
+      setUser(currentUser);
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        setError(err.message);
+      } else {
+        setError('An unexpected error occurred');
       }
     } finally {
       setIsLoading(false);
@@ -67,6 +91,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         user,
         isAuthenticated,
         onLogin,
+        onRegister,
         isLoading,
         error,
       }}>
