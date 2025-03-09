@@ -49,6 +49,12 @@ export type MapStackParamList = {
   RestaurantDetails: { restaurant: Restaurant };
 };
 
+export type SettingsStackParamList = {
+  Profile: undefined; // specifying 'undefined' means that the route doesn't have params.
+  Favourites: undefined; // specifying 'undefined' means that the route doesn't have params.
+  RestaurantDetails: { restaurant: Restaurant };
+};
+
 // Account Stack Navigator props
 export type AccountStackScreenProps<RouteName extends keyof AccountStackParamList> =
   StackScreenProps<
@@ -120,8 +126,17 @@ export type MapStackNavigationProps<RouteName extends keyof MapStackParamList> =
     RouteName // name of the route the screen belongs to.
   >;
 
+// Settings Stack Navigator props
+export type SettingsStackScreenProps<RouteName extends keyof SettingsStackParamList> =
+  StackScreenProps<
+    SettingsStackParamList,
+    RouteName // name of the route the screen belongs to.
+  >;
+
 // Combined screen props for RestaurantDetails accessible from multiple navigators.
+// This type definition ensures that the RestaurantDetails screen can handle navigation properties properly, regardless of which path the user took to get there.
 export type RestaurantDetailsScreenProps = CompositeScreenProps<
-  RestaurantsStackScreenProps<'RestaurantDetails'>, // props that the RestaurantDetails screen receives when it's navigated to from the RestaurantsStack.
-  MapStackScreenProps<'RestaurantDetails'> // props that the RestaurantDetails screen receives when it's navigated to from the MapStack.
+  RestaurantsStackScreenProps<'RestaurantDetails'>, // Props when coming from the Restaurants stack.
+  MapStackScreenProps<'RestaurantDetails'>, // Props when coming from the Map stack.
+  SettingsStackScreenProps<'RestaurantDetails'> // Props when coming from the Settings stack.
 >;
