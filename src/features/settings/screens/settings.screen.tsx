@@ -1,19 +1,54 @@
 import { useContext } from 'react';
 
-import { List } from 'react-native-paper';
+import styled from 'styled-components/native';
+import { Avatar, List } from 'react-native-paper';
+
+import { theme, type Theme } from '../../../infrastructure/theme';
+
+import { SettingsStackScreenProps } from '../../../types/navigation';
 
 import { AuthContext } from '../../../services/auth/auth.context';
 
-export const SettingsScreen = () => {
-  const { onLogout } = useContext(AuthContext);
+import { Spacer } from '../../../components/spacer/spacer.component';
+import { Text } from '../../../components/typography/text.component';
+
+const SettingsItem = styled(List.Item)`
+  padding: ${({ theme }: { theme: Theme }) => theme.space[3]};
+`;
+
+const AvatarContainer = styled.View`
+  align-items: center;
+  margin-top: ${({ theme }: { theme: Theme }) => theme.space[4]};
+`;
+
+export const SettingsScreen = ({ navigation }: SettingsStackScreenProps<'Profile'>) => {
+  const { user, onLogout } = useContext(AuthContext);
 
   return (
-    <List.Section>
-      <List.Item
-        title='Logout'
-        left={(props) => <List.Icon {...props} icon='logout' color='black' />}
-        onPress={onLogout}
-      />
-    </List.Section>
+    <>
+      <AvatarContainer>
+        <Avatar.Icon
+          size={180}
+          icon='human'
+          style={{ backgroundColor: theme.colors.brand.primary }}
+        />
+        <Spacer position='top' size='large'>
+          <Text variant='label'>{user?.email}</Text>
+        </Spacer>
+      </AvatarContainer>
+      <List.Section>
+        <SettingsItem
+          title='Favourites'
+          description='View your favourites'
+          left={(props: { color: string }) => <List.Icon {...props} color='black' icon='heart' />}
+          onPress={() => navigation.navigate('Favourites')}
+        />
+        <SettingsItem
+          title='Logout'
+          left={(props: { color: string }) => <List.Icon {...props} color='black' icon='logout' />}
+          onPress={onLogout}
+        />
+      </List.Section>
+    </>
   );
 };
