@@ -1,5 +1,7 @@
 import { useState, useContext } from 'react';
 
+import { ActivityIndicator } from 'react-native-paper';
+
 import { AuthContext } from '../../../services/auth/auth.context';
 
 import {
@@ -11,6 +13,7 @@ import {
   ErrorContainer,
 } from '../components/account.styles';
 
+import { colors } from '../../../infrastructure/theme/colors';
 import { Text } from '../../../components/typography/text.component';
 import { Spacer } from '../../../components/spacer/spacer.component';
 
@@ -19,7 +22,7 @@ export const RegisterScreen = () => {
   const [password, setPassword] = useState<string>('');
   const [repeatedPassword, setRepeatedPassword] = useState<string>('');
 
-  const { onRegister, error } = useContext(AuthContext);
+  const { onRegister, isLoading, error } = useContext(AuthContext);
 
   return (
     <AccountBackground>
@@ -51,16 +54,21 @@ export const RegisterScreen = () => {
           autoCapitalize='none'
           onChangeText={(p: string) => setRepeatedPassword(p)}
         />
+        <Spacer size='large' />
         {error && (
           <ErrorContainer size='large'>
             <Text variant='error'>{error}</Text>
           </ErrorContainer>
         )}
-        <AuthButton
-          icon='account-plus'
-          onPress={() => onRegister(email, password, repeatedPassword)}>
-          Register
-        </AuthButton>
+        {!isLoading ? (
+          <AuthButton
+            icon='account-plus'
+            onPress={() => onRegister(email, password, repeatedPassword)}>
+            Register
+          </AuthButton>
+        ) : (
+          <ActivityIndicator animating={true} color={colors.brand.primary} />
+        )}
         <Spacer size='large' />
       </AccountContainer>
     </AccountBackground>
