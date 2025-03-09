@@ -23,6 +23,7 @@ export const AccountCover = styled.View`
 
 // container for user input elements, styled with a background and margins for visual separation.
 export const AccountContainer = styled.View`
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.7);
   width: 100%;
   padding: ${({ theme }: { theme: Theme }) => theme.space[4]};
@@ -37,6 +38,7 @@ export const AuthButton = styled(Button).attrs({
 })`
   padding: ${({ theme }: { theme: Theme }) => theme.space[2]};
   margin: ${({ theme }: { theme: Theme }) => theme.space[2]};
+  width: 300px;
 `;
 
 // styled React Native Paper input text.
