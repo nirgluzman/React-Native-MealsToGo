@@ -96,6 +96,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // subscribe to the users current authentication state, and receive an event whenever that state changes.
     const unsubscribe = listenAuthState((currentUser) => {
+      setUser(currentUser); // update user state with the currentUser object received from the authentication listener (onAuthStateChanged).
       setIsAuthenticated(!!currentUser);
     });
 
