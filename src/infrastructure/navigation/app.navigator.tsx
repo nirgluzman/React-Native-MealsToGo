@@ -15,6 +15,10 @@ import {
 // library is installed by default on the template project.
 import { Ionicons } from '@expo/vector-icons';
 
+import { LocationContextProvider } from '../../services/location/location.context';
+import { RestaurantsContextProvider } from '../../services/restaurants/restaurants.context';
+import { FavouritesContextProvider } from '../../services/favourites/favourites.context';
+
 import { theme } from '../theme';
 
 import type { RootTabParamList } from '../../types/navigation';
@@ -51,11 +55,19 @@ const screenOptions = ({
 };
 
 export const AppNavigator = () => {
+  // Place context providers in AppNavigator to guarantee context updates upon user authentication state changes.
+  // This ensures context memory is cleaned when a user logs out.
   return (
-    <RestaurantsTab.Navigator screenOptions={screenOptions}>
-      <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
-      <RestaurantsTab.Screen name='Map' component={MapNavigator} />
-      <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
-    </RestaurantsTab.Navigator>
+    <LocationContextProvider>
+      <RestaurantsContextProvider>
+        <FavouritesContextProvider>
+          <RestaurantsTab.Navigator screenOptions={screenOptions}>
+            <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
+            <RestaurantsTab.Screen name='Map' component={MapNavigator} />
+            <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
+          </RestaurantsTab.Navigator>
+        </FavouritesContextProvider>
+      </RestaurantsContextProvider>
+    </LocationContextProvider>
   );
 };
