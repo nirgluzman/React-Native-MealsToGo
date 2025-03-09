@@ -20,6 +20,7 @@ import { FavouritesContext } from '../../../services/favourites/favourites.conte
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 import { Search } from '../components/search.component';
+import { RestaurantList } from '../components/restaurant-list.styles';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 
 // styled component based on the ActivityIndicator.
@@ -33,14 +34,6 @@ const LoadingContainer = styled.View`
   top: 50%;
   left: 50%;
 `;
-
-const RestaurantList = styled.FlatList.attrs({
-  // we're using styled-components to create a styled component from FlatList.
-  // attrs() is a helper function provided by styled-components that allow us to configure props of the underlying component (not CSS styles).
-  contentContainerStyle:
-    // FlatList prop which applies on the scroll view content container (the container which wraps all of the child views).
-    { padding: 16 },
-})``;
 
 export const RestaurantsScreen = ({
   navigation,
