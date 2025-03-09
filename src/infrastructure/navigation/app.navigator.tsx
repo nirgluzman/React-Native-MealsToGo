@@ -25,12 +25,11 @@ import type { RootTabParamList } from '../../types/navigation';
 
 import { RestaurantsNavigator } from './restaurants.navigator';
 import { MapNavigator } from './map.navigator';
-
-import { SettingsScreen } from '../../features/settings/screens/settings.screen';
+import { SettingsNavigator } from './settings.navigator';
 
 // we tell our navigator to use typecheck by passing it as a generic.
 // this will provide type checking and intelliSense for props of the Navigator and Screen components.
-const RestaurantsTab = createBottomTabNavigator<RootTabParamList>();
+const RootTab = createBottomTabNavigator<RootTabParamList>();
 
 // define the icon mapping for the bottom tab navigator.
 const iconMap: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> = {
@@ -61,11 +60,11 @@ export const AppNavigator = () => {
     <LocationContextProvider>
       <RestaurantsContextProvider>
         <FavouritesContextProvider>
-          <RestaurantsTab.Navigator screenOptions={screenOptions}>
-            <RestaurantsTab.Screen name='Restaurants' component={RestaurantsNavigator} />
-            <RestaurantsTab.Screen name='Map' component={MapNavigator} />
-            <RestaurantsTab.Screen name='Settings' component={SettingsScreen} />
-          </RestaurantsTab.Navigator>
+          <RootTab.Navigator screenOptions={screenOptions}>
+            <RootTab.Screen name='Restaurants' component={RestaurantsNavigator} />
+            <RootTab.Screen name='Map' component={MapNavigator} />
+            <RootTab.Screen name='Settings' component={SettingsNavigator} />
+          </RootTab.Navigator>
         </FavouritesContextProvider>
       </RestaurantsContextProvider>
     </LocationContextProvider>
