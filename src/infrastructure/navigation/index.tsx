@@ -1,6 +1,9 @@
 import { useContext } from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme, // Built-in themes, https://reactnavigation.org/docs/themes/
+} from '@react-navigation/native';
 
 import { AuthContext } from '../../services/auth/auth.context';
 
@@ -11,7 +14,11 @@ export const Navigation = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{
+        ...DarkTheme,
+        colors: { ...DarkTheme.colors, border: 'white' },
+      }}>
       {isAuthenticated ? <AppNavigator /> : <AccountNavigator />}
     </NavigationContainer>
   );
