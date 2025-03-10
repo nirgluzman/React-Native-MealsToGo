@@ -40,7 +40,7 @@ export const Search = ({
         icon={isFavouritesToggled ? 'heart' : 'heart-outline'}
         onIconPress={onFavouritesToggle} // when the heart icon is pressed, toggle the display of the user's favorites.
         onClearIconPress={() => setSearchKeyword('')} // clear the search query when the user presses the clear icon.
-        style={{ backgroundColor: theme.colors.bg.tertiary }}
+        style={{ backgroundColor: theme.colors.bg.primary }}
       />
     </SearchContainer>
   );

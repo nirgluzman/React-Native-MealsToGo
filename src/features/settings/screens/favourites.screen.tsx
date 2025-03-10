@@ -42,7 +42,9 @@ export const FavouritesScreen = ({ navigation }: SettingsStackScreenProps<'Favou
     />
   ) : (
     <NoFavouritesArea>
-      <Text variant='body'>No favourites yet</Text>
+      <Text variant='error' style={{ fontSize: 24 }}>
+        No favourites yet
+      </Text>
     </NoFavouritesArea>
   );
 };

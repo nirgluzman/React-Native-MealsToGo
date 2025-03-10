@@ -40,13 +40,16 @@ export const SettingsScreen = ({ navigation }: SettingsStackScreenProps<'Profile
         <SettingsItem
           title='Favourites'
           description='View your favourites'
-          left={(props: { color: string }) => <List.Icon {...props} color='black' icon='heart' />}
+          left={(props: { color: string }) => <List.Icon {...props} color='white' icon='heart' />}
           onPress={() => navigation.navigate('Favourites')}
+          titleStyle={{ color: theme.colors.text.inverse }}
+          descriptionStyle={{ color: theme.colors.text.inverse }}
         />
         <SettingsItem
           title='Logout'
-          left={(props: { color: string }) => <List.Icon {...props} color='black' icon='logout' />}
+          left={(props: { color: string }) => <List.Icon {...props} color='white' icon='logout' />}
           onPress={onLogout}
+          titleStyle={{ color: theme.colors.text.inverse }}
         />
       </List.Section>
     </>
