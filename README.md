@@ -96,6 +96,11 @@ https://docs.expo.dev/versions/latest/sdk/lottie/
 
 - A library that allows rendering After Effects animations.
 
+## React Native Animations
+
+https://docs.expo.dev/develop/user-interface/animation/ <br/>
+https://reactnative.dev/docs/animations
+
 ## React Native Maps / MapView
 
 https://docs.expo.dev/versions/latest/sdk/map-view/ <br />
