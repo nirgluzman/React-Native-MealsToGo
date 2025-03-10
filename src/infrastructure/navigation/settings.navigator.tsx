@@ -1,4 +1,8 @@
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+  TransitionPresets,
+} from '@react-navigation/stack';
 
 import { SettingsStackParamList } from '../../types/navigation';
 
@@ -13,9 +17,10 @@ export const SettingsNavigator = () => {
     <SettingsStack.Navigator
       screenOptions={{
         headerShown: false,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         gestureEnabled: true,
-        gestureDirection: 'horizontal',
+        // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        // gestureDirection: 'horizontal',
+        ...TransitionPresets.ModalPresentationIOS, // mimic the modal presentation style seen on iOS.
       }}>
       <SettingsStack.Screen name='Profile' component={SettingsScreen} />
       <SettingsStack.Screen name='Favourites' component={FavouritesScreen} />
