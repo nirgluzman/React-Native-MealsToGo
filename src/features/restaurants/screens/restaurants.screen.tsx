@@ -17,6 +17,7 @@ import type { Restaurant } from '../../../types/restaurant';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 import { FavouritesContext } from '../../../services/favourites/favourites.context';
 
+import { FadeInView } from '../../../components/animations/fade.animation';
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 import { Search } from '../components/search.component';
@@ -67,7 +68,9 @@ export const RestaurantsScreen = ({
               });
             }}>
             <Spacer position='bottom' size='large'>
-              <RestaurantInfoCard restaurant={item} />
+              <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+              </FadeInView>
             </Spacer>
           </TouchableOpacity>
         )}
