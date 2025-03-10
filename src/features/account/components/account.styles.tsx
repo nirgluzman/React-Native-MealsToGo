@@ -65,3 +65,11 @@ export const ErrorContainer = styled.View`
   margin-top: ${({ theme }: { theme: Theme }) => theme.space[2]};
   margin-bottom: ${({ theme }: { theme: Theme }) => theme.space[2]};
 `;
+
+export const AnimationWrapper = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 45%;
+  top: 20px;
+  padding: ${({ theme }: { theme: Theme }) => theme.space[1]};
+`;
