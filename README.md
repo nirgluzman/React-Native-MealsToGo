@@ -90,6 +90,12 @@ https://docs.expo.dev/guides/icons/
 - The `@expo/vector-icons` library is installed by default and it includes popular icon sets from
   https://icons.expo.fyi/
 
+## Lottie (Animation Library)
+
+https://docs.expo.dev/versions/latest/sdk/lottie/
+
+- A library that allows rendering After Effects animations.
+
 ## React Native Maps / MapView
 
 https://docs.expo.dev/versions/latest/sdk/map-view/ <br />
