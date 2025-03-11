@@ -1,18 +1,25 @@
+// Configure EAS Build, see: https://docs.expo.dev/build/eas-json/
+
 {
   "cli": {
     "version": ">= 15.0.12",
     "appVersionSource": "remote"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },
-    "preview": {
-      "distribution": "internal"
-    },
     "production": {
       "autoIncrement": true
+    },
+    "preview": {
+      "extends": "production",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "development": {
+      "extends": "production",
+      "developmentClient": true,
+      "distribution": "internal"
     }
   },
   "submit": {
