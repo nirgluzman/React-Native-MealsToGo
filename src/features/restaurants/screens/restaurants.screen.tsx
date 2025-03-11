@@ -1,9 +1,5 @@
 import { useState, useContext } from 'react';
 
-import {
-  TouchableOpacity, // interactive component that responds to user touch events (visual feedback by reducing the opacity of the component when it is pressed).
-} from 'react-native';
-
 import styled from 'styled-components/native';
 import { theme } from '../../../infrastructure/theme';
 
@@ -19,7 +15,9 @@ import { FavouritesContext } from '../../../services/favourites/favourites.conte
 
 import { FadeInView } from '../../../components/animations/fade.animation';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { Pressable } from '../../../components/button/pressable.component';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
+
 import { Search } from '../components/search.component';
 import { RestaurantList } from '../components/restaurant-list.styles';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
@@ -40,14 +38,16 @@ export const RestaurantsScreen = ({
   navigation,
 }: RestaurantsStackScreenProps<'RestaurantsList'>) => {
   const [displayFavourites, setDisplayFavourites] = useState<boolean>(false);
+
   const { restaurants, isLoading } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
 
   return (
     <>
       {isLoading && (
+        // display loading indicator during data fetch.
         <LoadingContainer>
-          <Loading animating={true} color={theme.colors.ui.success} size={50} />
+          <Loading animating={true} color={theme.colors.ui.quaternary} size={50} />
         </LoadingContainer>
       )}
       <Search
@@ -61,7 +61,7 @@ export const RestaurantsScreen = ({
         data={restaurants}
         keyExtractor={(item: Restaurant) => item.name}
         renderItem={({ item }: { item: Restaurant }) => (
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               navigation.navigate('RestaurantDetails', {
                 restaurant: item,
@@ -72,7 +72,7 @@ export const RestaurantsScreen = ({
                 <RestaurantInfoCard restaurant={item} />
               </FadeInView>
             </Spacer>
-          </TouchableOpacity>
+          </Pressable>
         )}
         showsVerticalScrollIndicator={false}
       />

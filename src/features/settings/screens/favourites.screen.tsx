@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 import type { SettingsStackScreenProps } from '../../../types/navigation';
@@ -12,6 +11,7 @@ import { RestaurantInfoCard } from '../../restaurants/components/restaurant-info
 
 import { Text } from '../../../components/typography/text.component';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { Pressable } from '../../../components/button/pressable.component';
 
 const NoFavouritesArea = styled.View`
   flex: 1;
@@ -27,7 +27,7 @@ export const FavouritesScreen = ({ navigation }: SettingsStackScreenProps<'Favou
       data={favourites}
       keyExtractor={(item: Restaurant) => item.name}
       renderItem={({ item }: { item: Restaurant }) => (
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('RestaurantDetails', {
               restaurant: item,
@@ -36,7 +36,7 @@ export const FavouritesScreen = ({ navigation }: SettingsStackScreenProps<'Favou
           <Spacer position='bottom' size='large'>
             <RestaurantInfoCard restaurant={item} />
           </Spacer>
-        </TouchableOpacity>
+        </Pressable>
       )}
       showsVerticalScrollIndicator={false}
     />
