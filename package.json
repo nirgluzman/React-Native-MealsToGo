@@ -40,6 +40,7 @@
     "@types/camelize": "^1.0.1",
     "@types/react": "~18.3.12",
     "@types/styled-components-react-native": "^5.2.5",
+    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.1",
     "typescript": "^5.7.2"
