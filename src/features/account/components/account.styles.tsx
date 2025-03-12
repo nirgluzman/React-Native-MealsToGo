@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { Text, TextInput } from 'react-native-paper';
 
 import type { Theme } from '../../../infrastructure/theme';
 import { colors } from '../../../infrastructure/theme/colors';
+import { Button } from '../../../components/button/button.component';
 
 // styled ImageBackground component with a full-screen background image and centered content.
 export const AccountBackground = styled.ImageBackground.attrs({
@@ -32,14 +33,8 @@ export const AccountContainer = styled.View`
 
 // styled React Native Paper button.
 export const AuthButton = styled(Button).attrs({
-  mode: 'contained-tonal', // button styling.
-  dark: true, // dark button will render light text.
   buttonColor: colors.brand.primary, // background color.
-})`
-  padding: ${({ theme }: { theme: Theme }) => theme.space[2]};
-  margin: ${({ theme }: { theme: Theme }) => theme.space[2]};
-  width: 300px;
-`;
+})``;
 
 // styled React Native Paper input text.
 export const AuthInput = styled(TextInput).attrs({
