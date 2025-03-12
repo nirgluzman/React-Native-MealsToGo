@@ -27,7 +27,15 @@
         }
       }
     },
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "recordAudioAndroid": false
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "22aad8f5-d1ed-441a-b8bc-dfc002380208"
