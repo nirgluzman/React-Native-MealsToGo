@@ -59,6 +59,22 @@ https://docs.expo.dev/guides/using-firebase/
   (\*) Using Firebase JS SDK -> for developing an app with Expo Go! <br /> (\*) Using React Native
   Firebase
 
+## Cloud Functions for Firebase
+
+https://firebase.google.com/docs/functions
+
+- It's a serverless framework that lets us automatically run backend code in response to events
+  triggered by background events, HTTPS requests, the Admin SDK, or Cloud Scheduler jobs.
+- [Use TypeScript for Cloud Functions](https://firebase.google.com/docs/functions/typescript).
+- Import function triggers directly from their submodules; see this
+  [link](https://firebase.google.com/docs/functions) for a complete list of supported triggers.
+
+```js
+import { onCall } from 'firebase-functions/v2/https';
+import { onRequest } from 'firebase-functions/v2/https';
+import { onDocumentWritten } from 'firebase-functions/v2/firestore';
+```
+
 ## React Native Paper
 
 https://callstack.github.io/react-native-paper/
