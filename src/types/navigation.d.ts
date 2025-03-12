@@ -53,6 +53,7 @@ export type SettingsStackParamList = {
   Profile: undefined; // specifying 'undefined' means that the route doesn't have params.
   Favourites: undefined; // specifying 'undefined' means that the route doesn't have params.
   RestaurantDetails: { restaurant: Restaurant };
+  Camera: undefined;
 };
 
 // Account Stack Navigator props
