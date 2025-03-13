@@ -136,6 +136,14 @@ https://github.com/react-native-maps/react-native-maps (full documentation)
 <br />
 [Android map not working correctly](https://github.com/react-native-maps/react-native-maps/issues/5236)
 
+## Google Geocoding API
+
+https://developers.google.com/maps/documentation/geocoding/overview
+
+- The Geocoding API is a service that accepts a place as an address, latitude and longitude
+  coordinates, or Place ID. It converts the address into latitude and longitude coordinates and a
+  Place ID, or converts latitude and longitude coordinates or a Place ID into an address.
+
 ## Safe Area Context
 
 https://docs.expo.dev/versions/latest/sdk/safe-area-context/ <br />
