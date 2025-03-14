@@ -39,6 +39,24 @@ https://expo.dev/go
 - [React Native Directory](https://reactnative.directory/) to check if a library is compatible with
   Expo Go.
 
+## Accessing Computer's Localhost from Android Emulator
+
+https://developer.android.com/studio/run/emulator
+
+- The Android Emulator simulates Android devices on your computer so that you can test your
+  application on a variety of devices and Android API levels without needing to have each physical
+  device.
+
+- Here are two ways to access local computer’s localhost: `IP 10.0.2.2` and `adb reverse`.
+
+- IP address `10.0.2.2` is an alias to the host machine’s loopback interface (localhost).
+
+- `adb reverse` command in Android Debug Bridge (ADB) is used to set up reverse port forwarding
+  between the Android device/Emulator and our computer. This command allows us to route requests
+  from a specific port on the Android device or Emulator to a port on our computer. It is often used
+  when we want to access services running on our computer, like a local web server, from our Android
+  device or Emulator.
+
 ## Set up ESLint in VS Code for React Native applications that use TypeScript
 
 https://typescript-eslint.io/ <br /> https://docs.expo.dev/guides/using-eslint/
