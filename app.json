@@ -28,6 +28,7 @@
       }
     },
     "plugins": [
+      ["expo-build-properties", { "android": { "usesCleartextTraffic": true } }], // allows unencrypted HTTP requests on Android, necessary for local development with Cloud Functions.
       "expo-font",
       [
         "expo-camera",
