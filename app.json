@@ -28,6 +28,7 @@
       }
     },
     "plugins": [
+      ["expo-build-properties", { "android": { "usesCleartextTraffic": true } }], // enable HTTP requests
       "expo-font",
       [
         "expo-camera",
