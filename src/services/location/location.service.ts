@@ -15,6 +15,7 @@ export const locationRequest = async (searchTerm: LocationMockKeys) => {
     // https://stackoverflow.com/questions/5528850/how-do-you-connect-localhost-in-the-android-emulator
     `http://10.0.2.2:5001/mealstogo-452418/us-central1/geocode?city=${searchTerm}`
   );
+
   return response.data;
 };
 
