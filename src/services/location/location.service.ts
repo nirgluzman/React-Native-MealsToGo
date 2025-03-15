@@ -1,18 +1,22 @@
+//
 // service layer that sits between the UI components and the data source.
+//
 
+import axios from 'axios';
 import camelize from 'camelize'; // recursively transform key strings to camel-case.
 
-import { locations, type LocationMockKeys, type LocationMockData } from './mock/locations'; // mock data
+import { type LocationMockKeys, type LocationMockData } from './mock/locations'; // mock data
 
 // function to fetch mock location data from a predefined set of locations.
-export const locationRequest = (searchTerm: LocationMockKeys) => {
-  return new Promise((resolve, reject) => {
-    const locationMock = locations[searchTerm];
-    if (!locationMock) {
-      reject('location not found');
-    }
-    resolve(locationMock);
-  });
+export const locationRequest = async (searchTerm: LocationMockKeys) => {
+  const response = await axios.get(
+    // To access the computer's localhost from an Android emulator, we use the special IP address 10.0.2.2,
+    // which is an alias to the host machine's loopback interface (localhost).
+    // https://stackoverflow.com/questions/5528850/how-do-you-connect-localhost-in-the-android-emulator
+    `http://10.0.2.2:5001/mealstogo-452418/us-central1/geocode?city=${searchTerm}`
+  );
+
+  return response.data;
 };
 
 // function to extract latitude and longitude from location results.
