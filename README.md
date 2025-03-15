@@ -93,6 +93,27 @@ import { onRequest } from 'firebase-functions/v2/https';
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
 ```
 
+## Environment Configuration in Firebase
+
+https://firebase.google.com/docs/functions/config-env?gen=2nd
+
+- The Firebase SDK for Cloud Functions offers built-in environment configuration.
+- [Notes on TypeScript types](https://stackoverflow.com/questions/79514147/what-is-the-response-type-of-onrequest-from-firebase-functions-v2-https):
+  <br/> `firebase-functions` type definitions uses `@types/express`, and therefore no need to
+  install @types/express separately; we should use what Firebase gives us by default.
+
+- **Parameterized configuration** (recommended for most scenarios). This provides strongly-typed
+  environment configuration with parameters that are validated at deploy time, which prevents errors
+  and simplifies debugging.
+- File-based configuration of **environment variables**. With this approach, we manually create a
+  `.env` file for loading environment variables.
+
+- **NOTE:** Environment configuration with `functions.config` is deprecated and is no longer be
+  supported.
+
+- **Google Cloud Secret Manager** - Cloud Functions for Firebase integrates with Secret Manager.
+  This encrypted service stores configuration values securely.
+
 ## React Native Paper
 
 https://callstack.github.io/react-native-paper/
@@ -154,13 +175,107 @@ https://github.com/react-native-maps/react-native-maps (full documentation)
 <br />
 [Android map not working correctly](https://github.com/react-native-maps/react-native-maps/issues/5236)
 
+## Google Maps Platform
+
+https://developers.google.com/maps/ <br /> https://developers.google.com/maps/documentation
+
+- Suite of tools and services that allows developers to embed Google Maps functionality into their
+  own websites and applications.
+
+## Client Libraries for Google Maps Web Services
+
+https://developers.google.com/maps/documentation/geocoding/client-library <br />
+https://github.com/googlemaps/google-maps-services-js (Node.js)
+
+- Community supported client libraries for Google Maps Services enable us to work with Google Maps
+  web services.
+- These libraries are intended for backend/server-side applications.
+
+## Google Maps API
+
+- Display maps using Google's services:
+
+  (\*) [Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview) -
+  for embedding maps in web applications.<br />
+
+  (\*)
+  [Maps SDK for Android](https://developers.google.com/maps/documentation/android-sdk/overview) -
+  for integrating maps into native Android applications.<br />
+
+  (\*) [Maps SDK for iOS](https://developers.google.com/maps/documentation/ios-sdk/overview) - for
+  integrating maps into native iOS applications. <br /> ...
+
 ## Google Geocoding API
 
 https://developers.google.com/maps/documentation/geocoding/overview
 
-- The Geocoding API is a service that accepts a place as an address, latitude and longitude
+- The `Geocoding API` is a service that accepts a place as an address, latitude and longitude
   coordinates, or Place ID. It converts the address into latitude and longitude coordinates and a
   Place ID, or converts latitude and longitude coordinates or a Place ID into an address.
+- Geocoding is powered by the
+  [@googlemaps/google-maps-services-js](https://www.npmjs.com/package/@googlemaps/google-maps-services-js)
+  package.
+
+## Google Nearby Search API
+
+https://developers.google.com/maps/documentation/places/web-service/nearby-search (NEW) <br />
+https://cloud.google.com/nodejs/docs/reference/places/1.7.0/places/protos.google.maps.places.v1.isearchnearbyrequest
+<br/> https://www.npmjs.com/package/@googlemaps/places (NPM)
+
+- [`Places API`](https://developers.google.com/maps/documentation/places/web-service) is a service
+  that accepts HTTP requests for location data through a variety of methods. It returns formatted
+  location data and imagery about establishments, geographic locations, or prominent points of
+  interest.
+- [`Nearby Search`](https://developers.google.com/maps/documentation/places/web-service/nearby-search)
+  takes one or more place types, and returns a list of matching places within the specified area. A
+  field mask specifying one or more data types is required.
+- **Note:** Every request requires a
+  [Field Mask](https://developers.google.com/maps/documentation/places/web-service/nearby-search#fieldmask)
+  set outside of the request proto. Here is a
+  [code snippet](https://stackoverflow.com/questions/79514940/how-to-include-fieldmask-in-nearby-search-new):
+
+  ```js
+  const placesNearbyResponse = await placesClient.searchNearby(requestParams, {
+    otherArgs: {
+      headers: {
+        'X-Goog-FieldMask': 'places.displayName',
+      },
+    },
+  });
+  ```
+
+- **Note:** the
+  [legacy Nearby Search](https://developers.google.com/maps/documentation/places/web-service/search-nearby)
+  is not longer available and cannot be enabled.
+
+## Google Maps Platform APIs require API keys; GCP Service Accounts are not supported !!
+
+- [`API keys`](https://developers.google.com/maps/documentation/javascript/get-api-key) are
+  mandatory for authenticating Google Maps Platform requests.
+- `Service Accounts` are not compatible with the Google Maps Platform APIs. <br />Maps APIs require
+  API keys for authentication, as they are not part of the Google Cloud Platform (GCP) IAM
+  authorization system. <br/>This is an inherent limitation of the Maps Platform and is unlikely to
+  change.
+
+## API Key Restrictions -> Configure allowed APIs and set resource quotas !!
+
+- **Security**: Key restrictions prevent unauthorized use, safeguarding against abuse and potential
+  breaches.
+- **Cost Control**: They limit usage, preventing unexpected spikes and helping adhere to budgets.
+- **Best Practice**: They enforce the principle of least privilege, enhancing overall application
+  security.
+
+- [Steps to enable an API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
+![](./docs/images/GCP%20API%20Key%20restrictions.png)
+
+## Environment variables in Expo
+
+https://docs.expo.dev/guides/environment-variables/
+
+- The Expo CLI will automatically load environment variables with an `EXPO_PUBLIC_` prefix from
+  `.env` files for use within our code.
+- Expo recommends **against** using `NODE_ENV`.
 
 ## Safe Area Context
 
