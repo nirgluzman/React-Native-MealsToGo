@@ -7,14 +7,11 @@ import camelize from 'camelize'; // recursively transform key strings to camel-c
 
 import { type LocationMockKeys, type LocationMockData } from './mock/locations'; // mock data
 
-// function to fetch mock location data from a predefined set of locations.
+import { geocodeUrl } from '../../utils/api.config';
+
+// function to fetch location data using a city name as the search term.
 export const locationRequest = async (searchTerm: LocationMockKeys) => {
-  const response = await axios.get(
-    // To access the computer's localhost from an Android emulator, we use the special IP address 10.0.2.2,
-    // which is an alias to the host machine's loopback interface (localhost).
-    // https://stackoverflow.com/questions/5528850/how-do-you-connect-localhost-in-the-android-emulator
-    `http://10.0.2.2:5001/mealstogo-452418/us-central1/geocode?city=${searchTerm}`
-  );
+  const response = await axios.get(`${geocodeUrl}?city=${searchTerm}`);
 
   return response.data;
 };
