@@ -9,14 +9,11 @@ import { type MockKeys, type MockData } from './mock'; // mock data
 
 import type { Restaurant } from '../../types/restaurant';
 
-// function to fetch mock restaurant data based on a location.
+import { placesNearbyUrl } from '../../utils/api.config';
+
+// function to fetch restaurants data based on a location.
 export const restaurantsRequest = async (location: MockKeys) => {
-  const response = await axios.get(
-    // To access the computer's localhost from an Android emulator, we use the special IP address 10.0.2.2,
-    // which is an alias to the host machine's loopback interface (localhost).
-    // https://stackoverflow.com/questions/5528850/how-do-you-connect-localhost-in-the-android-emulator
-    `http://10.0.2.2:5001/mealstogo-452418/us-central1/placesNearby?location=${location}`
-  );
+  const response = await axios.get(`${placesNearbyUrl}?location=${location}`);
 
   return response.data;
 };
