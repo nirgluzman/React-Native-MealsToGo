@@ -1,0 +1,28 @@
+@url-local = http://127.0.0.1:5001/mealstogo-2025/us-central1
+@url-prod = https://us-central1-mealstogo-2025.cloudfunctions.net
+
+###
+GET {{url-prod}}/geocode?city=munich
+
+###
+GET {{url-local}}/placesNearby?location=48.0616018,11.360796
+
+###
+POST https://places.googleapis.com/v1/places:searchNearby
+Content-Type: application/json
+X-Goog-Api-Key: <GOOGLE API KEY>
+X-Goog-FieldMask: *
+
+{
+  "includedTypes": ["restaurant"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 48.1351253,
+        "longitude": 11.7228755
+      },
+      "radius": 3000
+    }
+  }
+}
