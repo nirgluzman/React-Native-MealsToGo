@@ -40,8 +40,8 @@ export const MapScreen = ({ navigation }: MapStackScreenProps<'MapView'>) => {
     setMapRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: Math.abs(northeastLat - southwestLat),
-      longitudeDelta: Math.abs(northeastLng - southwestLng),
+      latitudeDelta: Math.abs(northeastLat - southwestLat) / 3, // reduce latitude/longitude delta for closer zoom.
+      longitudeDelta: Math.abs(northeastLng - southwestLng) / 3, // reduce latitude/longitude delta for closer zoom.
     });
   }, [location]);
 
@@ -52,11 +52,11 @@ export const MapScreen = ({ navigation }: MapStackScreenProps<'MapView'>) => {
         <Map provider={PROVIDER_GOOGLE} region={mapRegion}>
           {restaurants.map((restaurant) => (
             <Marker
-              key={restaurant.name}
+              key={restaurant.placeId}
               title={restaurant.name}
               coordinate={{
-                latitude: restaurant.geometry.location.lat,
-                longitude: restaurant.geometry.location.lng,
+                latitude: restaurant.location.latitude,
+                longitude: restaurant.location.longitude,
               }}>
               <Callout
                 onPress={() => {
