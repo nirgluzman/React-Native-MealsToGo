@@ -59,7 +59,7 @@ export const RestaurantsScreen = ({
       )}
       <RestaurantList
         data={restaurants}
-        keyExtractor={(item: Restaurant) => item.name}
+        keyExtractor={(item: Restaurant) => item.placeId}
         renderItem={({ item }: { item: Restaurant }) => (
           <Pressable
             onPress={() => {
