@@ -5,19 +5,17 @@
 import axios from 'axios';
 import camelize from 'camelize'; // recursively transform key strings to camel-case.
 
-import { type LocationMockKeys, type LocationMockData } from './mock/locations'; // mock data
-
 import { geocodeUrl } from '../../utils/api.config';
 
 // function to fetch location data using a city name as the search term.
-export const locationRequest = async (searchTerm: LocationMockKeys) => {
+export const locationRequest = async (searchTerm: string) => {
   const response = await axios.get(`${geocodeUrl}?city=${searchTerm}`);
 
   return response.data;
 };
 
 // function to extract latitude and longitude from location results.
-export const locationTransform = ({ results }: { results: LocationMockData['results'] }) => {
+export const locationTransform = ({ results }: { results: any[] }) => {
   const { geometry } = camelize(results)[0]; // convert all property names to camelCase format.
   const { lat, lng } = geometry.location;
   const { viewport } = geometry;

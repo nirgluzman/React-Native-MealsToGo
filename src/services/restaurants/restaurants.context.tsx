@@ -47,8 +47,8 @@ export const RestaurantsContextProvider = ({ children }: { children: ReactNode }
     setIsLoading(true); // display a loading indicator to the user while the data is being fetched.
     setError(null);
     try {
-      const response = await restaurantsRequest(locationString as any); // API request to fetch restaurant data.
-      const data = restaurantsTransform(response as any) as Restaurant[]; // format and enrich the data from the API.
+      const response = await restaurantsRequest(locationString); // API request to fetch restaurants data (Google Places Nearby Search API).
+      const data = restaurantsTransform(response); // format and enrich the data from the API.
       setRestaurants(data);
     } catch (err) {
       setError(err instanceof Error ? err : new Error(String(err)));
