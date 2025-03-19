@@ -28,10 +28,15 @@ export const RestaurantInfoCard = ({ restaurant }: { restaurant: Restaurant }) =
 
   const ratingArray = Array.from(new Array(Math.round(rating)));
 
+  // determine the image source: photo URL from API (if exists) or local placeholder image as a fallback.
+  const imageSource = photos[0]
+    ? { uri: photos[0] }
+    : require('../../../../assets/restaurant-placeholder.jpg');
+
   return (
     <RestaurantCard mode='elevated' elevation={5}>
       <Favourite restaurant={restaurant} />
-      <RestaurantCardCover key={placeId} source={{ uri: photos[0] }} />
+      <RestaurantCardCover key={placeId} source={imageSource} />
       <Info>
         <Text variant='label'>{name}</Text>
         <Section>
