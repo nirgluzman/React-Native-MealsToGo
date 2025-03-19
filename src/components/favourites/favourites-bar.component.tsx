@@ -32,7 +32,9 @@ export const FavouritesBar = ({
     <>
       <FavouritesWrapper>
         <Spacer position='left' size='large'>
-          <Text variant='caption'>Favourites</Text>
+          <Text variant='caption' style={{ color: 'white' }}>
+            Favourites
+          </Text>
         </Spacer>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {favourites.map((restaurant) => (
