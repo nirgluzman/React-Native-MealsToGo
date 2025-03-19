@@ -24,6 +24,7 @@ export const MapScreen = ({ navigation }: MapStackScreenProps<'MapView'>) => {
   // render map region when location changes.
   useEffect(() => {
     if (!location) {
+      setMapRegion(null); // reset map region to null to indicate no location data.
       return;
     }
 
