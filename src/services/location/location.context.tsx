@@ -41,12 +41,13 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
       return;
     }
 
-    // skip if searchKeyword is the same as the current keyword (case-insensitive).
-    if (searchKeyword.toLowerCase() === keyword.toLowerCase()) {
+    // skip if searchKeyword is identical to the current keyword (case-insensitive, trailing spaces ignored).
+    if (searchKeyword.toLowerCase().trimEnd() === keyword.toLowerCase()) {
       return;
     }
 
-    setKeyword(searchKeyword);
+    // remove trailing spaces from search keyword.
+    setKeyword(searchKeyword.trimEnd());
   };
 
   useEffect(
@@ -58,8 +59,8 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
       // fetch location data using an immediately invoked async function expression (IIFE).
       (async () => {
         try {
-          const response = await locationRequest(keyword.toLowerCase() as any); // API request to fetch restaurant data.
-          const data = locationTransform(response as any) as Location; // format and enrich the data from the API.
+          const response = await locationRequest(keyword.toLowerCase()); // API request to fetch restaurant data.
+          const data = locationTransform(response) as Location; // format and enrich the data from the API.
           setLocation(data);
         } catch (err) {
           // handle error if API request fails.
