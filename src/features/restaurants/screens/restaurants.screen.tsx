@@ -5,6 +5,7 @@ import { theme } from '../../../infrastructure/theme';
 
 import {
   ActivityIndicator, // present progress of some activity in the app.
+  Divider, // content separator, https://callstack.github.io/react-native-paper/docs/components/Divider/
 } from 'react-native-paper';
 
 import type { RestaurantsStackScreenProps } from '../../../types/navigation';
@@ -63,7 +64,10 @@ export const RestaurantsScreen = ({
       />
 
       {displayFavourites && (
-        <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+        <>
+          <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+          <Divider horizontalInset={true} />
+        </>
       )}
 
       {hasError && (
