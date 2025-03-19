@@ -7,11 +7,6 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": false,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     },
@@ -34,6 +29,19 @@
         "expo-camera",
         {
           "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-splash-screen", // configures native splash screen for Expo apps.
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash-icon.png",
+          "dark": {
+            "image": "./assets/splash-icon.png",
+            "backgroundColor": "#ffffff"
+          },
+          "imageWidth": 200,
+          "resizeMode": "contain"
         }
       ]
     ],
