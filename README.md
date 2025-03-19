@@ -159,10 +159,13 @@ https://reactnative.dev/docs/animations
 ## React Native Maps / MapView
 
 https://docs.expo.dev/versions/latest/sdk/map-view/ <br />
-https://github.com/react-native-maps/react-native-maps (full documentation)
+https://github.com/react-native-maps/react-native-maps (full documentation) <br />
+https://docs.expo.dev/versions/v52.0.0/sdk/map-view/#deploy-app-with-google-maps <br/>
 
 - A library that provides a Map component that uses Google Maps on Android and Apple Maps or Google
   Maps on iOS.
+
+- **Note:** Google Maps is no longer supported in Expo Go for Android from SDK 53.
 
 - **Note:** Currently, `react-native-maps` does not support the New Architecture (SDK 52 or newer) !
 
@@ -268,6 +271,14 @@ https://cloud.google.com/nodejs/docs/reference/places/1.7.0/places/protos.google
 - [Steps to enable an API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 ![](./docs/images/GCP%20API%20Key%20restrictions.png)
+
+## SplashScreen configuration with Expo
+
+https://docs.expo.dev/versions/latest/sdk/splash-screen/ <br />
+https://docs.expo.dev/develop/user-interface/splash-screen-and-app-icon/ <br />
+
+- The `expo-splash-screen` config plugin is the recommended method for configuring the splash
+  screen.
 
 ## Environment variables in Expo
 
