@@ -10,11 +10,13 @@ import {
 import type { RestaurantsStackScreenProps } from '../../../types/navigation';
 import type { Restaurant } from '../../../types/restaurant';
 
+import { LocationContext } from '../../../services/location/location.context';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 import { FavouritesContext } from '../../../services/favourites/favourites.context';
 
 import { FadeInView } from '../../../components/animations/fade.animation';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { Text } from '../../../components/typography/text.component';
 import { Pressable } from '../../../components/button/pressable.component';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 
@@ -39,8 +41,12 @@ export const RestaurantsScreen = ({
 }: RestaurantsStackScreenProps<'RestaurantsList'>) => {
   const [displayFavourites, setDisplayFavourites] = useState<boolean>(false);
 
-  const { restaurants, isLoading } = useContext(RestaurantsContext);
+  const { error: locationError } = useContext(LocationContext);
+  const { restaurants, isLoading, error: restaurantsError } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
+
+  // determine if there are any errors fetching location or restaurant data.
+  const hasError = !!locationError || !!restaurantsError;
 
   return (
     <>
@@ -50,32 +56,43 @@ export const RestaurantsScreen = ({
           <Loading animating={true} color={theme.colors.ui.quaternary} size={50} />
         </LoadingContainer>
       )}
+
       <Search
         isFavouritesToggled={displayFavourites}
         onFavouritesToggle={() => setDisplayFavourites((prev) => !prev)}
       />
+
       {displayFavourites && (
         <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
       )}
-      <RestaurantList
-        data={restaurants}
-        keyExtractor={(item: Restaurant) => item.placeId}
-        renderItem={({ item }: { item: Restaurant }) => (
-          <Pressable
-            onPress={() => {
-              navigation.navigate('RestaurantDetails', {
-                restaurant: item,
-              });
-            }}>
-            <Spacer position='bottom' size='large'>
-              <FadeInView>
-                <RestaurantInfoCard restaurant={item} />
-              </FadeInView>
-            </Spacer>
-          </Pressable>
-        )}
-        showsVerticalScrollIndicator={false}
-      />
+
+      {hasError && (
+        <Spacer position='left' size='large'>
+          <Text variant='error'>Something went wrong retrieving the data</Text>
+        </Spacer>
+      )}
+
+      {!hasError && (
+        <RestaurantList
+          data={restaurants}
+          keyExtractor={(item: Restaurant) => item.placeId}
+          renderItem={({ item }: { item: Restaurant }) => (
+            <Pressable
+              onPress={() => {
+                navigation.navigate('RestaurantDetails', {
+                  restaurant: item,
+                });
+              }}>
+              <Spacer position='bottom' size='large'>
+                <FadeInView>
+                  <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
+              </Spacer>
+            </Pressable>
+          )}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </>
   );
 };
