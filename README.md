@@ -288,6 +288,47 @@ https://docs.expo.dev/guides/environment-variables/
   `.env` files for use within our code.
 - Expo recommends **against** using `NODE_ENV`.
 
+## Environment variables in EAS Build
+
+https://docs.expo.dev/eas/environment-variables/ </br> https://expo.dev/blog/environment-variables
+
+- **.env** files are not included in our EAS Build <br /> After all, EAS Build and Workflows jobs
+  run on a remote serves and .env files are usually excluded from our project - listed in
+  .gitignore.
+- Expo can store and manage environment variables on EAS servers and synchronizing them with our
+  code.
+- Push environment variables from .env file to the selected environment:
+
+```bash
+eas env:push --environment <development|preview|production> --path <path to the input `.env` file>
+```
+
+## Dynamic app configuration
+
+https://docs.expo.dev/workflow/configuration/
+
+- The app config configures many things such as app name, icon, splash screen, deep linking scheme,
+  API keys to use for some services and so on. <br /> For a complete list of available properties,
+  see: https://docs.expo.dev/versions/latest/config/app/
+- Library authors can extend the app config by using
+  [Expo Config plugins](https://docs.expo.dev/config-plugins/introduction/).
+- `app.json` and `app.config.json` are **static** config files, meaning all the configurations
+  remain fixed. <br /> I.e., this restricts us from dynamically changing any value, as we have to
+  hardcode the configurations.
+- For **dynamic** customization, we can use the JavaScript (`app.config.js`) or TypeScript
+  (`app.config.ts`).
+
+## Install app variants on the same device
+
+https://docs.expo.dev/build-reference/variants/
+
+- We can have multiple installations of build variants (development, preview, and production)
+  simultaneously on the same device. <br /> This allows working in development, previewing the next
+  version of the app, and running the production version on a device without needing to uninstall
+  and reinstall the app.
+- `eas.json` uses the **APP_VARIANT** environment variable to specify the build variant. <br />Then
+  we configure the build in `app.config.js` based on the **APP_VARIANT** value.
+
 ## Safe Area Context
 
 https://docs.expo.dev/versions/latest/sdk/safe-area-context/ <br />
