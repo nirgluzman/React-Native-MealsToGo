@@ -14,12 +14,18 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "APP_VARIANT": "preview"
       }
     },
     "development": {
       "extends": "production",
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "APP_VARIANT": "development"
+      }
     }
   },
   "submit": {
