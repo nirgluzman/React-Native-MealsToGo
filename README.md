@@ -57,6 +57,17 @@ https://typescript-eslint.io/ <br /> https://docs.expo.dev/guides/using-eslint/
 
 - ESLint statically analyzes your code to quickly find problems.
 
+## Debugging Runtime issues
+
+https://docs.expo.dev/debugging/runtime-issues/
+
+- We can perform full native debugging with `Android Studio` and `Xcode` by generating source code locally and building
+  from that source.
+
+- **Production app is crashing** <br/> For **Android**, we can use `adb logcat` and for **iOS** we can use the Console
+  app in Xcode.
+- Note that we can view logcat in Android Studio.
+
 ## Using Firebase with Expo
 
 https://docs.expo.dev/guides/using-firebase/
