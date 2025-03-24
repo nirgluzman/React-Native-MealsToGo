@@ -6,6 +6,13 @@ name: Android App Development Build
 
 on:
   workflow_dispatch: # allows manual triggering of the workflow from the GitHub Actions tab.
+    inputs:
+      release_notes:
+        type: string
+        required: true
+        description: 'Release Notes'
+        default: 'Development build'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,10 +48,20 @@ jobs:
         run:
           eas build --platform android --profile development --local --output ${{ github.workspace }}/app-dev-build.apk
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+      # - name: Upload APK artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: app-dev-release # name of the artifact to upload.
+      #     path: ${{ github.workspace }}/app-dev-build.apk # what to upload.
+      #     overwrite: true # artifact with a matching name will be deleted before a new one is uploaded.
+      #     retention-days: 5
+
+      # https://github.com/marketplace/actions/firebase-app-distribution
+      - name: Upload APK artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          name: app-dev-release # name of the artifact to upload.
-          path: ${{ github.workspace }}/app-dev-build.apk # what to upload.
-          overwrite: true # artifact with a matching name will be deleted before a new one is uploaded.
-          retention-days: 5
+          appId: ${{secrets.FIREBASE_ANDROID_APP_ID_DEV}}
+          serviceCredentialsFileContent: ${{ secrets.GCP_FIREBASE_SERVICE_ACCOUNT }}
+          groups: dev
+          file: ${{ github.workspace }}/app-dev-build.apk
+          releaseNotes: ${{ inputs.release_notes }}

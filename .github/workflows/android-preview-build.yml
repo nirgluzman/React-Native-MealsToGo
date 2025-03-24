@@ -6,8 +6,16 @@ name: Android App Preview Build
 
 on:
   workflow_dispatch: # allows manual triggering of the workflow from the GitHub Actions tab.
+    inputs:
+      release_notes:
+        type: string
+        required: true
+        description: 'Release Notes'
+        default: 'Preview build'
+
 jobs:
   build:
+    name: Building and distributing app (Preview build)
     runs-on: ubuntu-latest
     steps:
       - name: Setup repo
@@ -41,10 +49,20 @@ jobs:
         run:
           eas build --platform android --profile preview --local --output ${{ github.workspace }}/app-preview-build.apk
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+      # - name: Upload APK artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: app-preview-release # name of the artifact to upload.
+      #     path: ${{ github.workspace }}/app-preview-build.apk # what to upload.
+      #     overwrite: true # artifact with a matching name will be deleted before a new one is uploaded.
+      #     retention-days: 5
+
+      # https://github.com/marketplace/actions/firebase-app-distribution
+      - name: Upload APK artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          name: app-preview-release # name of the artifact to upload.
-          path: ${{ github.workspace }}/app-preview-build.apk # what to upload.
-          overwrite: true # artifact with a matching name will be deleted before a new one is uploaded.
-          retention-days: 5
+          appId: ${{secrets.FIREBASE_ANDROID_APP_ID_PREVIEW}}
+          serviceCredentialsFileContent: ${{ secrets.GCP_FIREBASE_SERVICE_ACCOUNT }}
+          groups: dev
+          file: ${{ github.workspace }}/app-preview-build.apk
+          releaseNotes: ${{ inputs.release_notes }}
