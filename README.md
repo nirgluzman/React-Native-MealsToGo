@@ -152,6 +152,12 @@ https://docs.expo.dev/guides/icons/
 - The `@expo/vector-icons` library is installed by default and it includes popular icon sets from
   https://icons.expo.fyi/
 
+## Apple SF Symbols
+
+https://docs.expo.dev/versions/latest/sdk/symbols/ <br /> https://developer.apple.com/sf-symbols/
+
+- Library of symbols that are designed to integrate seamlessly with the system font for Apple platforms.
+
 ## Lottie (Animation Library)
 
 https://docs.expo.dev/versions/latest/sdk/lottie/
