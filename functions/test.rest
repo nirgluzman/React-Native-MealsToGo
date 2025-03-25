@@ -3,9 +3,11 @@
 
 ###
 GET {{url-prod}}/geocode?city=munich
+Authorization: Bearer <ID Token>
 
 ###
 GET {{url-local}}/placesNearby?location=48.0616018,11.360796
+Authorization: Bearer <ID Token>
 
 ###
 POST https://places.googleapis.com/v1/places:searchNearby
