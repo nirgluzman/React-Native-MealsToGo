@@ -9,8 +9,17 @@ import type { Restaurant } from '../../types/restaurant';
 import { placesNearbyUrl } from '../../utils/api.config';
 
 // function to fetch restaurants data based on a location.
-export const restaurantsRequest = async (location: string) => {
-  const response = await axios.get(`${placesNearbyUrl}?location=${location}`);
+export const restaurantsRequest = async (location: string, idToken: string | null) => {
+  // check if the idToken is null or undefined.
+  if (idToken === null || idToken === undefined) {
+    throw new Error('Missing ID Token');
+  }
+
+  const response = await axios.get(`${placesNearbyUrl}?location=${location}`, {
+    headers: {
+      Authorization: `Bearer ${idToken}`,
+    },
+  });
 
   return response.data;
 };
@@ -27,7 +36,7 @@ export const restaurantsTransform = ({ results = [] }: { results: any[] }) => {
       address: restaurant.shortFormattedAddress,
       isOpenNow: restaurant.currentOpeningHours && restaurant.currentOpeningHours.openNow,
       isClosedTemporarily: restaurant.businessStatus === 'CLOSED_TEMPORARILY',
-      rating: restaurant.rating,
+      rating: restaurant.rating || 0,
     };
   });
 

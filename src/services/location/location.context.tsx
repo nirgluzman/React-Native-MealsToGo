@@ -2,11 +2,13 @@
 // React context for location data, including fetching and managing the location, loading state, and any errors.
 //
 
-import { useState, useEffect, createContext, ReactNode } from 'react';
+import { useState, useEffect, useContext, createContext, ReactNode } from 'react';
 
 import { locationRequest, locationTransform } from './location.service';
 
 import type { Location } from '../../types/location';
+
+import { AuthContext } from '../auth/auth.context';
 
 // define the context value type
 type LocationContextType = {
@@ -35,6 +37,9 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
+  // obtain idToken from AuthContext for location fetch.
+  const { idToken } = useContext(AuthContext);
+
   const onSearch = (searchKeyword: string) => {
     // skip if searchKeyword is empty.
     if (!searchKeyword.length) {
@@ -59,7 +64,7 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
       // fetch location data using an immediately invoked async function expression (IIFE).
       (async () => {
         try {
-          const response = await locationRequest(keyword.toLowerCase()); // API request to fetch restaurant data.
+          const response = await locationRequest(keyword.toLowerCase(), idToken); // API request to fetch restaurant data.
           const data = locationTransform(response) as Location; // format and enrich the data from the API.
           setLocation(data);
         } catch (err) {
@@ -70,8 +75,9 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
         }
       })();
     },
+
     // execute location search whenever the keyword state changes.
-    [keyword]
+    [keyword, idToken]
   );
 
   return (

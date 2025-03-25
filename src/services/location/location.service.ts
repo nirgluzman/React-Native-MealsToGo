@@ -8,8 +8,17 @@ import camelize from 'camelize'; // recursively transform key strings to camel-c
 import { geocodeUrl } from '../../utils/api.config';
 
 // function to fetch location data using a city name as the search term.
-export const locationRequest = async (searchTerm: string) => {
-  const response = await axios.get(`${geocodeUrl}?city=${searchTerm}`);
+export const locationRequest = async (searchTerm: string, idToken: string | null) => {
+  // check if the idToken is null or undefined.
+  if (idToken === null || idToken === undefined) {
+    throw new Error('Missing ID Token');
+  }
+
+  const response = await axios.get(`${geocodeUrl}?city=${searchTerm}`, {
+    headers: {
+      Authorization: `Bearer ${idToken}`,
+    },
+  });
 
   return response.data;
 };

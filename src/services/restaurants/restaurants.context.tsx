@@ -7,18 +7,18 @@ import { useState, useEffect, useContext, createContext, ReactNode } from 'react
 import { restaurantsRequest, restaurantsTransform } from './restaurants.service';
 
 import type { Restaurant } from '../../types/restaurant';
-import type { Location } from '../../types/location';
 
+import { AuthContext } from '../auth/auth.context';
 import { LocationContext } from '../location/location.context';
 
-// define the context value type
+// define the context value type.
 type RestaurantsContextType = {
   restaurants: Restaurant[];
   isLoading: boolean;
   error: Error | null;
 };
 
-// create context with proper typing and default value
+// create context with proper typing and default value.
 export const RestaurantsContext = createContext<RestaurantsContextType>({
   restaurants: [],
   isLoading: false,
@@ -30,36 +30,40 @@ export const RestaurantsContextProvider = ({ children }: { children: ReactNode }
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
+  // obtain idToken from AuthContext for restaurant fetch.
+  const { idToken } = useContext(AuthContext);
+
   // obtain location from LocationContext for restaurant fetch - make restaurant fetching location-aware.
   const { location } = useContext(LocationContext);
 
-  const fetchRestaurants = async (location: Location | null) => {
-    // skip if location or coordinates are missing.
-    if (!location?.center.lat || !location?.center.lng) {
-      return;
-    }
-
-    // create location string from coordinates.
-    const { lat, lng } = location.center;
-    const locationString = `${lat},${lng}`;
-
-    setRestaurants([]);
-    setIsLoading(true); // display a loading indicator to the user while the data is being fetched.
-    setError(null);
-    try {
-      const response = await restaurantsRequest(locationString); // API request to fetch restaurants data (Google Places Nearby Search API).
-      const data = restaurantsTransform(response); // format and enrich the data from the API.
-      setRestaurants(data);
-    } catch (err) {
-      setError(err instanceof Error ? err : new Error(String(err)));
-    } finally {
-      setIsLoading(false); // data fetching process is complete (success or error).
-    }
-  };
-
   useEffect(() => {
-    fetchRestaurants(location);
-  }, [location]);
+    // fetch restaurant data using an immediately invoked async function expression (IIFE).
+    (async () => {
+      // skip if location or coordinates are missing.
+      if (!location?.center.lat || !location?.center.lng) {
+        return;
+      }
+
+      // create location string from coordinates.
+      const { lat, lng } = location.center;
+      const locationString = `${lat},${lng}`;
+
+      setIsLoading(true); // display a loading indicator to the user while the data is being fetched.
+      setRestaurants([]);
+      setError(null);
+      try {
+        const response = await restaurantsRequest(locationString, idToken); // API request to fetch restaurants data (Google Places Nearby Search API).
+        const data = restaurantsTransform(response); // format and enrich the data from the API.
+        setRestaurants(data);
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      } finally {
+        setIsLoading(false); // data fetching process is complete (success or error).
+      }
+    })();
+
+    // execute restaurant search whenever the location state changes.
+  }, [location, idToken]);
 
   return (
     <RestaurantsContext.Provider
