@@ -51,17 +51,15 @@ export const SettingsScreen = ({ navigation }: SettingsStackScreenProps<'Profile
       <AvatarContainer>
         <Pressable onPress={() => navigation.navigate('Camera')}>
           {!photo ? (
-            <Avatar.Icon
-              size={180}
-              icon='human'
-              style={{ backgroundColor: theme.colors.brand.primary }}
-            />
+            <Avatar.Icon size={180} icon='human' style={{ backgroundColor: theme.colors.brand.primary }} />
           ) : (
             <Avatar.Image size={180} source={{ uri: photo }} />
           )}
         </Pressable>
         <Spacer position='top' size='large'>
-          <Text variant='label'>{user?.email}</Text>
+          <Text variant='label' style={{ color: 'white' }}>
+            {user?.email}
+          </Text>
         </Spacer>
       </AvatarContainer>
       <List.Section>
@@ -80,9 +78,7 @@ export const SettingsScreen = ({ navigation }: SettingsStackScreenProps<'Profile
         <Pressable onPress={onLogout} android_ripple={{ color: theme.colors.ui.quaternary }}>
           <SettingsItem
             title='Logout'
-            left={(props: { color: string }) => (
-              <List.Icon {...props} color='white' icon='logout' />
-            )}
+            left={(props: { color: string }) => <List.Icon {...props} color='white' icon='logout' />}
             titleStyle={{ color: theme.colors.text.inverse }}
           />
         </Pressable>
