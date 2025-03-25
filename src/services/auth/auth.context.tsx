@@ -16,6 +16,7 @@ type AuthContextType = {
   onLogin: (email: string, password: string) => Promise<void>;
   onRegister: (email: string, password: string, repeatedPassword: string) => Promise<void>;
   onLogout: () => Promise<void>;
+  idToken: string | null;
   isLoading: boolean;
   error: string | null;
 };
@@ -27,6 +28,7 @@ export const AuthContext = createContext<AuthContextType>({
   onLogin: async () => {},
   onRegister: async () => {},
   onLogout: async () => {},
+  idToken: null,
   isLoading: false,
   error: null,
 });
@@ -34,6 +36,7 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [idToken, setIdToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,6 +46,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const { user: currentUser } = await loginRequest(email, password);
       setUser(currentUser);
+      setIdToken(await currentUser.getIdToken());
     } catch (err) {
       if (err instanceof FirebaseError) {
         setError(err.message);
@@ -65,6 +69,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const { user: currentUser } = await registerRequest(email, password);
       setUser(currentUser);
+      setIdToken(await currentUser.getIdToken());
     } catch (err) {
       if (err instanceof FirebaseError) {
         setError(err.message);
@@ -82,6 +87,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       await logoutRequest();
       setUser(null);
+      setIdToken(null);
     } catch (err) {
       if (err instanceof FirebaseError) {
         setError(err.message);
@@ -95,14 +101,22 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     // subscribe to the users current authentication state, and receive an event whenever that state changes.
-    const unsubscribe = listenAuthState((currentUser) => {
+    const unsubscribe = listenAuthState(async (currentUser) => {
       setUser(currentUser); // update user state with the currentUser object received from the authentication listener (onAuthStateChanged).
       setIsAuthenticated(!!currentUser);
+      if (currentUser) {
+        setIdToken(await currentUser.getIdToken());
+      } else {
+        setIdToken(null);
+      }
     });
 
     return () => {
       unsubscribe(); // unsubscribe when the component is unmounted (cleanup mechanism).
     };
+
+    // The authentication listener (onAuthStateChanged) itself is designed to handle subsequent authentication state changes.
+    // Therefore, the dependency array should be empty.
   }, []);
 
   return (
@@ -113,6 +127,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         onLogin,
         onRegister,
         onLogout,
+        idToken,
         isLoading,
         error,
       }}>
